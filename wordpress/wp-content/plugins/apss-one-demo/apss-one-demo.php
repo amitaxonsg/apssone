@@ -88,14 +88,14 @@ add_shortcode('apss_one_demo', function () {
         $examples = [3 => ['Alex Tan','Professional'], 4=>['Sarah Lim','Associate'], 5=>['Daniel Wong','Professional'], 6=>['Priya Nair','Associate']];
         $membership_data=[];
         try {
-          if (class_exists('\\Civi\\Api4\\Membership')) {
-            $records=\\Civi\\Api4\\Membership::get(FALSE)->addWhere('contact_id','IN',array_keys($examples))->execute();
+          if (class_exists('\Civi\Api4\Membership')) {
+            $records=\Civi\Api4\Membership::get(FALSE)->addWhere('contact_id','IN',array_keys($examples))->execute();
             foreach ($records as $record) {
               $id=(int)($record['contact_id']??0);
               $membership_data[$id]=$record;
             }
           }
-        } catch (\\Throwable $error) {
+        } catch (\Throwable $error) {
           // Leave cards as unavailable rather than showing stale or invented status.
           error_log('APSS One: CiviCRM membership preview unavailable');
         }
