@@ -2,12 +2,12 @@
 /**
  * Plugin Name: APSS One Demo Interface
  * Description: APSS One presentation portal. All example data is synthetic; live CiviCRM integration is a future phase.
- * Version: 0.5.0
+ * Version: 0.6.0
  * Requires PHP: 8.1
  */
 if (!defined('ABSPATH')) exit;
 add_action('wp_enqueue_scripts', function () {
-    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.5.0');
+    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.6.0');
 });
 add_shortcode('apss_one_demo', function () {
     wp_enqueue_style('apss-one-demo');
@@ -44,7 +44,7 @@ add_shortcode('apss_one_demo', function () {
       <div class="apss-topbar"><span>ASIA PROFESSIONAL SPEAKERS SINGAPORE</span><span><span class="apss-dot"></span> AXON CONCEPT DEMONSTRATION</span></div>
       <header class="apss-header">
         <a class="apss-brand" href="#apss-one"><img src="<?php echo esc_url($logo); ?>" alt="Asia Professional Speakers Singapore logo" loading="lazy"><span><strong>APSS <em>One</em></strong><small>Your membership. Your community. One place.</small></span></a>
-        <nav class="apss-nav" aria-label="APSS One demo navigation"><a href="#apss-journey">Member journey</a><a href="#apss-features">Platform</a><a href="#apss-ai">AI roadmap</a></nav>
+        <nav class="apss-nav" aria-label="APSS One demo navigation"><a href="#apss-journey">Member journey</a><a href="#apss-directory">Speakers</a><a href="#apss-membership-demo">Membership</a><a href="#apss-features">Platform</a><a href="#apss-ai">AI roadmap</a></nav>
         <span class="apss-preview-pill">● Concept preview</span>
       </header>
       <section class="apss-hero">
@@ -81,11 +81,30 @@ add_shortcode('apss_one_demo', function () {
           </div></div>
         <?php endforeach; ?>
       </section>
+      <section id="apss-directory" class="apss-section apss-speaker-showcase">
+        <div class="apss-section-heading"><div><div class="apss-kicker dark">EXISTING APSS CONTENT · DIRECTORY REFERENCE</div><h2>Professional speakers,<br><span>one searchable network.</span></h2></div><p>The current APSS directory already contains public member profiles. These examples show what APSS One can retain and improve, with member-controlled updates and automatic eligibility once connected to CiviCRM.</p></div>
+        <div class="apss-directory-tools"><label for="apss-speaker-search">Explore example public listings</label><input id="apss-speaker-search" type="search" placeholder="Search speaker or topic" oninput="const q=this.value.toLowerCase();document.querySelectorAll('#apss-speaker-results .apss-speaker').forEach(el=>{el.hidden=!el.textContent.toLowerCase().includes(q)})" aria-controls="apss-speaker-results"></div>
+        <div id="apss-speaker-results" class="apss-speaker-grid">
+        <?php
+        $public_speakers = [
+          ['Mette Johansson, CSP','Motivation · Leadership'],
+          ['Andrew Chow, CSP','Marketing · Social Media · Technology'],
+          ['Dr. Tanvi Gautam, CSP','Leadership · Change Management · Communication'],
+          ['Tracey McGrath, CSP','Management · Leadership · Conflict Resolution'],
+          ['Adeline Tiah','Leadership · Marketing · Personal Development'],
+          ['C.J. Ng, CSP','Sales · Negotiation'],
+        ];
+        foreach ($public_speakers as $speaker) : ?>
+          <article class="apss-speaker"><div class="apss-speaker-initial" aria-hidden="true"><?php echo esc_html(mb_substr($speaker[0],0,1)); ?></div><div><h3><?php echo esc_html($speaker[0]); ?></h3><p><?php echo esc_html($speaker[1]); ?></p><span>Public directory reference</span></div></article>
+        <?php endforeach; ?>
+        </div>
+        <div class="apss-quote-disclaimer"><strong>Source and status:</strong> These names and speaking categories are examples from the existing <a href="https://www.asiaspeakers.org/members/" target="_blank" rel="noopener noreferrer">APSS public members directory ↗</a>. The entries are not imported into this demo's CiviCRM database; their current membership eligibility and permission to reuse photos or biographies have not been verified. The filter above works on these public-reference cards only. Production migration will require APSS's approved export and validation.</div>
+      </section>
       <section id="apss-membership-demo" class="apss-section apss-membership-showcase">
-        <div class="apss-section-heading"><div><div class="apss-kicker dark">LIVE FOUNDATION · PHASE 2</div><h2>Membership engine, now in place.</h2></div><p>CiviCRM 6.19.1 is installed, with a separate APSS database and SGD configured. The two membership plans below are ready for setup and testing.</p></div>
+        <div class="apss-section-heading"><div><div class="apss-kicker dark">LIVE FOUNDATION · PHASE 2</div><h2>Membership engine, now in place.</h2></div><p>CiviCRM 6.19.1 is installed, with a separate APSS database and SGD configured. Associate and Professional membership types are configured in CiviCRM. The demonstration below is explanatory; online applications and billing are not yet active.</p></div>
         <div class="apss-membership-plans">
-          <article><div class="apss-plan-tag">ASSOCIATE MEMBER · AM</div><h3>S$350 <small>/ year</small></h3><p>For emerging speakers building their skills, network and professional journey.</p><div class="apss-plan-status">Membership type setup in progress</div></article>
-          <article><div class="apss-plan-tag">PROFESSIONAL MEMBER · PM</div><h3>S$390 <small>/ year</small></h3><p>For established professional speakers, with public speaker-directory eligibility subject to active status.</p><div class="apss-plan-status">Membership type setup in progress</div></article>
+          <article><div class="apss-plan-tag">ASSOCIATE MEMBER · AM</div><h3>S$350 <small>/ year</small></h3><p>For emerging speakers building their skills, network and professional journey.</p><div class="apss-plan-status">CiviCRM membership type configured · Checkout coming soon</div></article>
+          <article><div class="apss-plan-tag">PROFESSIONAL MEMBER · PM</div><h3>S$390 <small>/ year</small></h3><p>For established professional speakers, with public speaker-directory eligibility subject to active status.</p><div class="apss-plan-status">CiviCRM membership type configured · Checkout coming soon</div></article>
           <article><div class="apss-plan-tag">CSP RECOGNITION</div><h3>Credential <small>status</small></h3><p>Professional designation verification and continuing membership eligibility, with APSS/GSF rules.</p><div class="apss-plan-status">Custom verification · Coming Soon</div></article>
         </div>
         <div class="apss-quote-disclaimer"><strong>Platform status:</strong> WordPress and CiviCRM are operational foundations. This section is a quotation walkthrough, not a live checkout, membership application, or customer portal. No actual member transactions are being accepted.</div>
