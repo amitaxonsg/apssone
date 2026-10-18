@@ -11,3 +11,26 @@ body.apss-demo-template #wpadminbar{z-index:99999}
 @media(max-width:600px){body.apss-demo-template .apss-hero{min-width:0}}
 
 .apss-quotation-guide{background:#fff}.apss-quotation-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.apss-quote-card{border:1px solid #dfebe8;border-radius:14px;padding:30px;background:linear-gradient(145deg,#fff,#f6faf9)}.apss-quote-num{font-weight:800;font-size:11px;color:#0b8277;letter-spacing:.12em}.apss-quote-card h3{font-size:23px;letter-spacing:-.04em;margin:12px 0}.apss-quote-card p{font-size:14px;color:#556c73;min-height:76px}.apss-quote-card b{display:block;color:#165e58;font-size:12px}.apss-quote-card small{display:block;color:#6d858b;font-size:12px;margin-top:8px}.apss-quote-disclaimer{background:#f0f5f3;border-left:4px solid #1b8b80;border-radius:7px;padding:18px 22px;margin-top:20px;font-size:13px;color:#3d5b61}@media(max-width:650px){.apss-quotation-grid{grid-template-columns:1fr}.apss-quote-card p{min-height:0}}
+
+/* Proposal reference readability and technical sections */
+.apss-one{font-size:17px;line-height:1.65}
+.apss-nav a{font-size:15px}.apss-hero-copy>p{font-size:19px}.apss-section-heading>p{font-size:16px;max-width:450px}
+.apss-hero-note,.apss-disclaimer,.apss-panel-foot{font-size:13px}
+.apss-tile summary p{font-size:15px;min-height:65px}.apss-tile h4{font-size:20px}.apss-tile-details{font-size:15px}.apss-tile-details small{font-size:13px}
+.apss-open,.apss-quote-card b,.apss-quote-card small{font-size:14px}
+.apss-quote-card p{font-size:16px;min-height:0}.apss-quote-disclaimer{font-size:15px}
+.apss-architecture{background:#f5faf8}.apss-tech-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.apss-tech-grid article{border:1px solid #d9e8e4;border-radius:16px;background:#fff;padding:30px}
+.apss-tech-grid span{display:block;font-size:12px;font-weight:800;letter-spacing:.14em;color:#0e8379}
+.apss-tech-grid h3{font-size:29px;letter-spacing:-.04em;margin:16px 0 10px}
+.apss-tech-grid p{font-size:16px;color:#526d72;line-height:1.75}
+.apss-tech-grid a{font-size:14px;color:#08786f;font-weight:750}
+.apss-architecture-note{border-left:4px solid #0b8177;background:#e8f3ef;border-radius:8px;margin-top:24px;padding:21px 23px;font-size:15px;color:#3a5d61}
+.apss-table-scroll{overflow-x:auto;border:1px solid #dbe7e3;border-radius:14px}
+.apss-rfp-table{width:100%;border-collapse:collapse;min-width:750px;background:#fff;font-size:15px}
+.apss-rfp-table thead{background:#0b3941;color:#fff}.apss-rfp-table th,.apss-rfp-table td{text-align:left;vertical-align:top;padding:19px 20px;border-bottom:1px solid #e5ecea}
+.apss-rfp-table tbody th{width:26%;font-weight:700;color:#164950}.apss-rfp-table tbody td:nth-child(2){color:#4c6a71;line-height:1.7}
+.apss-rfp-table tbody tr:nth-child(even){background:#f7faf9}
+.apss-rfp-overview>.apss-disclaimer{margin-top:17px;line-height:1.7}
+@media(max-width:1000px){.apss-tech-grid{grid-template-columns:1fr}.apss-tech-grid article{padding:25px}}
+@media(max-width:600px){.apss-one{font-size:16px}.apss-hero-copy>p{font-size:17px}.apss-tech-grid h3{font-size:26px}.apss-table-scroll{margin-right:-2vw}}
