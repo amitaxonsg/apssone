@@ -1,25 +1,25 @@
 <?php
 /**
  * Plugin Name: APSS One Demo Interface
- * Description: APSS One presentation portal. All example data is synthetic; live CiviCRM integration is a future phase.
- * Version: 0.7.0
+ * Description: APSS One presentation portal. All example data is synthetic; live custom membership engine integration is a future phase.
+ * Version: 0.8.0
  * Requires PHP: 8.1
  */
 if (!defined('ABSPATH')) exit;
 add_action('wp_enqueue_scripts', function () {
-    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.7.0');
+    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.8.0');
 });
 add_shortcode('apss_one_demo', function () {
     wp_enqueue_style('apss-one-demo');
     $logo = 'https://www.asiaspeakers.org/wp-content/uploads/2020/06/logo_2-1.png';
     $groups = [
       'Members' => [
-        ['Membership & Renewals','users','Applications, AM/PM/CSP levels, approvals, renewal reminders and payment history.','Application → review → approval → active membership → renewal','CiviCRM integration'],
+        ['Membership & Renewals','users','Applications, AM/PM/CSP levels, approvals, renewal reminders and payment history.','Application → review → approval → active membership → renewal','custom membership engine integration'],
         ['Speaker Directory','mic-2','Public speaker profiles, expertise, languages, industry focus and enquiries.','Member updates profile → eligibility check → public listing','Custom module'],
         ['Member Journey','route','Seven growth stages: Discover, Join, Belong, Develop, Build, Lead, Legacy.','Engagement evidence → milestone → next recommended action','Custom module'],
       ],
       'Engagement' => [
-        ['Events & Check-in','calendar','Meetings, workshops, member pricing, RSVP, QR check-in and attendance.','Create event → register → attend → update member record','CiviCRM extension'],
+        ['Events & Check-in','calendar','Meetings, workshops, member pricing, RSVP, QR check-in and attendance.','Create event → register → attend → update member record','custom membership engine extension'],
         ['Communities & SIGs','messages','Special Interest Groups, member discussions, announcements and resource sharing.','Join eligible group → collaborate → receive digests','Custom module'],
         ['Convention & Awards','trophy','Multi-day conference passes, speaker submissions, awards and judging.','Submit → review → register → check in','Custom module'],
       ],
@@ -30,7 +30,7 @@ add_shortcode('apss_one_demo', function () {
       ],
       'Operations' => [
         ['Communications','mail','Member segments, newsletters, event notices, consent and scheduled reminders.','Choose segment → approve → send → report','CiviMail integration'],
-        ['Finance & Xero Cloud','wallet','Membership fees, event payments, invoices, receipts, refunds and automated reconciliation with Xero Cloud.','CiviCRM records payment → authorised connector syncs invoice/payment/refund to Xero → reconciliation and exception monitoring','CiviCRM + custom Xero Cloud API connector'],
+        ['Finance & Xero Cloud','wallet','Membership fees, event payments, invoices, receipts, refunds and automated reconciliation with Xero Cloud.','custom membership engine records payment → authorised connector syncs invoice/payment/refund to Xero → reconciliation and exception monitoring','custom membership engine + custom Xero Cloud API connector'],
         ['ExCo Administration','shield','Portfolio roles, approvals, committee handovers, audit trails and reports.','Task assigned → approval → audit → handover','Custom module'],
       ],
       'AI & Insights' => [
@@ -81,36 +81,8 @@ add_shortcode('apss_one_demo', function () {
           </div></div>
         <?php endforeach; ?>
       </section>
-      <section id="apss-live-members" class="apss-section apss-live-members">
-        <div class="apss-section-heading"><div><div class="apss-kicker dark">CIVICRM LIVE DEMONSTRATION</div><h2>One membership database.<br><span>Four example journeys.</span></h2></div><p>These are synthetic demonstration records only. Their current membership status is read from CiviCRM, not maintained in a separate WordPress list.</p></div>
-        <div class="apss-live-grid">
-        <?php
-        $examples = [3 => ['Alex Tan','Professional'], 4=>['Sarah Lim','Associate'], 5=>['Daniel Wong','Professional'], 6=>['Priya Nair','Associate']];
-        $membership_data=[];
-        try {
-          if (class_exists('\Civi\Api4\Membership')) {
-            $records=\Civi\Api4\Membership::get(FALSE)->addWhere('contact_id','IN',array_keys($examples))->execute();
-            foreach ($records as $record) {
-              $id=(int)($record['contact_id']??0);
-              $membership_data[$id]=$record;
-            }
-          }
-        } catch (\Throwable $error) {
-          // Leave cards as unavailable rather than showing stale or invented status.
-          error_log('APSS One: CiviCRM membership preview unavailable');
-        }
-        $statuses=[2=>'Current',4=>'Expired',5=>'Pending'];
-        foreach ($examples as $id=>$meta):
-          $record=$membership_data[$id]??null;
-          $status=$record ? ($statuses[(int)$record['status_id']]??'Other') : 'Awaiting demo data';
-        ?>
-          <article class="apss-live-card"><span class="apss-live-label">SYNTHETIC RECORD</span><h3><?php echo esc_html($meta[0]); ?></h3><p><?php echo esc_html($meta[1]); ?> Member</p><span class="apss-live-status"><?php echo esc_html($status); ?></span><small>CiviCRM contact <?php echo (int)$id; ?> · illustrative data</small></article>
-        <?php endforeach; ?>
-        </div>
-        <p class="apss-disclaimer">No applications, invoices, member profile editing or emails are enabled in this preview. Speaker-directory references below are separate from these synthetic records. Actual APSS members will not be migrated without permission.</p>
-      </section>
       <section id="apss-directory" class="apss-section apss-speaker-showcase">
-        <div class="apss-section-heading"><div><div class="apss-kicker dark">EXISTING APSS CONTENT · DIRECTORY REFERENCE</div><h2>Professional speakers,<br><span>one searchable network.</span></h2></div><p>The current APSS directory already contains public member profiles. These examples show what APSS One can retain and improve, with member-controlled updates and automatic eligibility once connected to CiviCRM.</p></div>
+        <div class="apss-section-heading"><div><div class="apss-kicker dark">EXISTING APSS CONTENT · DIRECTORY REFERENCE</div><h2>Professional speakers,<br><span>one searchable network.</span></h2></div><p>The current APSS directory already contains public member profiles. These examples show what APSS One can retain and improve, with member-controlled updates and automatic eligibility once connected to custom membership engine.</p></div>
         <div class="apss-directory-tools"><label for="apss-speaker-search">Explore example public listings</label><input id="apss-speaker-search" type="search" placeholder="Search speaker or topic" oninput="const q=this.value.toLowerCase();document.querySelectorAll('#apss-speaker-results .apss-speaker').forEach(el=>{el.hidden=!el.textContent.toLowerCase().includes(q)})" aria-controls="apss-speaker-results"></div>
         <div id="apss-speaker-results" class="apss-speaker-grid">
         <?php
@@ -126,39 +98,39 @@ add_shortcode('apss_one_demo', function () {
           <article class="apss-speaker"><div class="apss-speaker-initial" aria-hidden="true"><?php echo esc_html(mb_substr($speaker[0],0,1)); ?></div><div><h3><?php echo esc_html($speaker[0]); ?></h3><p><?php echo esc_html($speaker[1]); ?></p><span>Public directory reference</span></div></article>
         <?php endforeach; ?>
         </div>
-        <div class="apss-quote-disclaimer"><strong>Source and status:</strong> These names and speaking categories are examples from the existing <a href="https://www.asiaspeakers.org/members/" target="_blank" rel="noopener noreferrer">APSS public members directory ↗</a>. The entries are not imported into this demo's CiviCRM database; their current membership eligibility and permission to reuse photos or biographies have not been verified. The filter above works on these public-reference cards only. Production migration will require APSS's approved export and validation.</div>
+        <div class="apss-quote-disclaimer"><strong>Source and status:</strong> These names and speaking categories are examples from the existing <a href="https://www.asiaspeakers.org/members/" target="_blank" rel="noopener noreferrer">APSS public members directory ↗</a>. The entries are not imported into this demo's custom membership engine database; their current membership eligibility and permission to reuse photos or biographies have not been verified. The filter above works on these public-reference cards only. Production migration will require APSS's approved export and validation.</div>
       </section>
       <section id="apss-membership-demo" class="apss-section apss-membership-showcase">
-        <div class="apss-section-heading"><div><div class="apss-kicker dark">LIVE FOUNDATION · PHASE 2</div><h2>Membership engine, now in place.</h2></div><p>CiviCRM 6.19.1 is installed, with a separate APSS database and SGD configured. Associate and Professional membership types are configured in CiviCRM. The demonstration below is explanatory; online applications and billing are not yet active.</p></div>
+        <div class="apss-section-heading"><div><div class="apss-kicker dark">PROPOSED MEMBERSHIP SOLUTION</div><h2>Membership designed around APSS.</h2></div><p>WordPress hosts the RFQ reference and branded APSS experience. Membership applications, approvals, renewals and speaker eligibility are proposed custom workflows; no membership engine or checkout is currently active.</p></div>
         <div class="apss-membership-plans">
-          <article><div class="apss-plan-tag">ASSOCIATE MEMBER · AM</div><h3>S$350 <small>/ year</small></h3><p>For emerging speakers building their skills, network and professional journey.</p><div class="apss-plan-status">CiviCRM membership type configured · Checkout coming soon</div></article>
-          <article><div class="apss-plan-tag">PROFESSIONAL MEMBER · PM</div><h3>S$390 <small>/ year</small></h3><p>For established professional speakers, with public speaker-directory eligibility subject to active status.</p><div class="apss-plan-status">CiviCRM membership type configured · Checkout coming soon</div></article>
+          <article><div class="apss-plan-tag">ASSOCIATE MEMBER · AM</div><h3>S$350 <small>/ year</small></h3><p>For emerging speakers building their skills, network and professional journey.</p><div class="apss-plan-status">Proposed feature · Coming Soon</div></article>
+          <article><div class="apss-plan-tag">PROFESSIONAL MEMBER · PM</div><h3>S$390 <small>/ year</small></h3><p>For established professional speakers, with public speaker-directory eligibility subject to active status.</p><div class="apss-plan-status">Proposed feature · Coming Soon</div></article>
           <article><div class="apss-plan-tag">CSP RECOGNITION</div><h3>Credential <small>status</small></h3><p>Professional designation verification and continuing membership eligibility, with APSS/GSF rules.</p><div class="apss-plan-status">Custom verification · Coming Soon</div></article>
         </div>
-        <div class="apss-quote-disclaimer"><strong>Platform status:</strong> WordPress and CiviCRM are operational foundations. This section is a quotation walkthrough, not a live checkout, membership application, or customer portal. No actual member transactions are being accepted.</div>
+        <div class="apss-quote-disclaimer"><strong>Platform status:</strong> WordPress and custom membership engine are operational foundations. This section is a quotation walkthrough, not a live checkout, membership application, or customer portal. No actual member transactions are being accepted.</div>
       </section>
       <section id="apss-architecture" class="apss-section apss-architecture">
-        <div class="apss-section-heading"><div><div class="apss-kicker dark">PROPOSED OPEN-SOURCE FOUNDATION</div><h2>One platform. Built for APSS.</h2></div><p>This quotation reference presents a single branded experience delivered with WordPress, CiviCRM and APSS-specific extensions.</p></div>
+        <div class="apss-section-heading"><div><div class="apss-kicker dark">PROPOSED OPEN-SOURCE FOUNDATION</div><h2>One platform. Built for APSS.</h2></div><p>This quotation reference presents a single branded experience delivered with WordPress, custom membership engine and APSS-specific extensions.</p></div>
         <div class="apss-tech-grid">
           <article><span>FOUNDATION 01</span><h3>WordPress</h3><p>Public website, searchable speaker pages, visual editing, user experience and customised member dashboards.</p><a href="https://wordpress.org/" target="_blank" rel="noopener noreferrer">WordPress project ↗</a></article>
-          <article><span>FOUNDATION 02</span><h3>CiviCRM</h3><p>Central contact and member records, membership levels and renewals, contributions, standard events, email segments and reports. Custom extensions connect the specialist APSS workflows to its records.</p><a href="https://civicrm.org/" target="_blank" rel="noopener noreferrer">Explore CiviCRM ↗</a></article>
+          <article><span>FOUNDATION 02</span><h3>Modular application backend</h3><p>Central contact and member records, membership levels and renewals, contributions, standard events, email segments and reports. Custom extensions connect the specialist APSS workflows to its records.</p><a href="https://civicrm.org/" target="_blank" rel="noopener noreferrer">Explore custom membership engine ↗</a></article>
           <article><span>ACCOUNTING INTEGRATION</span><h3>Xero Cloud</h3><p>Xero stays APSS’s accounting system. A proposed secure sync sends approved invoices, payments, refunds and contact references from APSS One to Xero, with mapping, reconciliation, retry logs and duplicate controls.</p><a href="https://www.xero.com/sg/" target="_blank" rel="noopener noreferrer">Xero Cloud ↗</a></article>
         </div>
-        <div class="apss-architecture-note"><strong>Integration boundaries:</strong> WordPress and CiviCRM are the proposed foundation, not yet a live CiviCRM connection in this demo. Xero Cloud sync is proposed custom development and requires an authorised APSS Xero connection, validation of accounting rules and API testing.</div>
+        <div class="apss-architecture-note"><strong>Integration boundaries:</strong> WordPress and custom membership engine are the proposed foundation, not yet a live custom membership engine connection in this demo. Xero Cloud sync is proposed custom development and requires an authorised APSS Xero connection, validation of accounting rules and API testing.</div>
       </section>
       <section class="apss-section apss-rfp-overview">
         <div class="apss-section-heading"><div><div class="apss-kicker dark">RFP / DELIVERABLE EXPLANATION</div><h2>What we will develop.</h2></div><p>Each module below will be built on the shared membership foundation. The cards above describe the individual workflow; this table shows the development approach for APSS decision-makers.</p></div>
         <div class="apss-table-scroll"><table class="apss-rfp-table"><thead><tr><th>Requested module</th><th>Foundation and custom scope</th><th>Proposal status</th></tr></thead><tbody>
         <?php
           $plans = [
-            ['Membership services & journeys','CiviCRM membership, custom approval flow, seven-stage tracking, configurable AM/PM/CSP pathways and renewal automation.'],
-            ['Speaker directory','WordPress public profile pages, CiviCRM membership eligibility checks, expertise filters, enquiry routing and member self-editing.'],
+            ['Membership services & journeys','custom membership engine membership, custom approval flow, seven-stage tracking, configurable AM/PM/CSP pathways and renewal automation.'],
+            ['Speaker directory','WordPress public profile pages, custom membership engine membership eligibility checks, expertise filters, enquiry routing and member self-editing.'],
             ['Community and SIGs','Custom protected groups, discussions, notifications, moderation, member permissions and resource sharing.'],
             ['Events','CiviEvent-based event records plus custom ticket rules, check-in, attendance, organisers and specialised formats.'],
-            ['Convention','Custom passes, multi-day sessions, ticketing, sponsor views and exports linked to CiviCRM contact records.'],
+            ['Convention','Custom passes, multi-day sessions, ticketing, sponsor views and exports linked to custom membership engine contact records.'],
             ['Professional development','Custom course catalogue, protected learning resources, assessments, 4 Core Modules, 26 electives, CPD and mentoring rules.'],
             ['Communications','CiviMail and consent segmentation plus APSS-specific templates, automations, deliverability provider and scheduling.'],
-            ['Finance & Xero Cloud','CiviCRM payments/invoices and a custom approved sync to Xero for invoices, payment status, refunds, reconciliation and exceptions.'],
+            ['Finance & Xero Cloud','custom membership engine payments/invoices and a custom approved sync to Xero for invoices, payment status, refunds, reconciliation and exceptions.'],
             ['Public website','WordPress page templates, content management, SEO, responsive layouts and member-directory integration.'],
             ['ExCo & administration','Role-based approvals, delegated portfolio access, tasks, audit events, committee handovers and data safeguards.'],
             ['Reports & analytics','Unified member, renewals, events, learning and financial reporting; CSV/Excel exports and ExCo-only metrics.'],
@@ -174,7 +146,7 @@ add_shortcode('apss_one_demo', function () {
       <section id="apss-delivery" class="apss-section apss-quotation-guide">
         <div class="apss-section-heading"><div><div class="apss-kicker dark">PROPOSAL WALKTHROUGH</div><h2>From concept to delivery.</h2></div><p>Use this view alongside the formal quotation to distinguish the current demonstrator from the planned production system.</p></div>
         <div class="apss-quotation-grid">
-          <div class="apss-quote-card"><span class="apss-quote-num">01 / FOUNDATION</span><h3>Unified membership</h3><p>WordPress serves the branded experience. CiviCRM is proposed for a single member record, memberships, renewals, contacts, payments and standard events.</p><b>Next development milestone</b><small>CiviCRM installation, member roles, synthetic records and basic status-based workflows.</small></div>
+          <div class="apss-quote-card"><span class="apss-quote-num">01 / FOUNDATION</span><h3>Unified membership</h3><p>WordPress serves the branded experience. custom membership engine is proposed for a single member record, memberships, renewals, contacts, payments and standard events.</p><b>Next development milestone</b><small>custom membership engine installation, member roles, synthetic records and basic status-based workflows.</small></div>
           <div class="apss-quote-card"><span class="apss-quote-num">02 / SPECIALIST MODULES</span><h3>Built around APSS</h3><p>Custom speaker-directory eligibility, community spaces, learning, assessments, CPD, mentoring, competitions and ExCo workflows.</p><b>Planned / Coming Soon</b><small>Detailed scope and acceptance criteria to be confirmed against the 221-item RFP compliance matrix.</small></div>
           <div class="apss-quote-card"><span class="apss-quote-num">03 / CONNECTED SERVICES</span><h3>APSS-operated ecosystem</h3><p>Planned integrations with Xero, Zoom, Google Workspace and payment/email providers, with ownership and access controlled by APSS.</p><b>Planned / Coming Soon</b><small>Integrations, migration and operating costs must appear separately in the formal quotation.</small></div>
           <div class="apss-quote-card"><span class="apss-quote-num">04 / OPTIONAL INTELLIGENCE</span><h3>AI with oversight</h3><p>Optional Groq-backed speaker matching, FAQs and administrative drafting using only approved data and permission-limited application tools.</p><b>Phase 2 concept</b><small>No live AI calls, payment changes or member-data access are enabled in this demo.</small></div>
@@ -182,14 +154,14 @@ add_shortcode('apss_one_demo', function () {
         <div class="apss-quote-disclaimer"><strong>Quotation note:</strong> This demonstration explains proposed workflows; it is not proof that a requirement has been delivered. The signed RFP response, fixed-price schedule, architecture, testing criteria and implementation plan remain the authoritative scope.</div>
       </section>
       <section class="apss-ai-banner"><div><div class="apss-kicker">OPTIONAL PHASE 2 · GROQ API</div><h2>Intelligence that helps people connect.</h2><p>Future AI-powered speaker discovery, membership guidance, and staff-assisted reporting — with strict permissions, approved data and human oversight.</p><span>API service is not connected in this demo.</span></div><div class="apss-ai-mark" aria-hidden="true">✳</div></section>
-      <footer class="apss-footer"><div><b>APSS <em>One</em></b><p>A concept proposal by Axon 1Pro Solutions</p></div><div>Built on a proposed WordPress + CiviCRM foundation.<br>All showcased content is illustrative. Features marked Coming Soon are not implemented.</div></footer>
+      <footer class="apss-footer"><div><b>APSS <em>One</em></b><p>A concept proposal by Axon 1Pro Solutions</p></div><div>Built on a proposed WordPress + proposed custom modules foundation.<br>All showcased content is illustrative. Features marked Coming Soon are not implemented.</div></footer>
     </div>
     <?php return ob_get_clean();
 });
 
 
 // Apply presentation-only template to the dedicated APSS One page.
-// Other WordPress pages, the dashboard and CiviCRM screens are untouched.
+// Other WordPress pages, the dashboard and custom membership engine screens are untouched.
 add_filter('template_include', function ($template) {
     if (is_admin() || !is_singular('page')) return $template;
     $page = get_queried_object();
