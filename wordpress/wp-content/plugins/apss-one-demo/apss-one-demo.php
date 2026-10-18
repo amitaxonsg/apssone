@@ -2,12 +2,12 @@
 /**
  * Plugin Name: APSS One RFQ Proposal
  * Description: Private APSS One digital transformation RFQ and quotation reference.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Requires PHP: 8.1
  */
 if (!defined('ABSPATH')) exit;
 add_action('wp_enqueue_scripts', function () {
-  wp_register_style('apss-one-proposal', plugins_url('assets/demo.css', __FILE__), [], '1.1.0');
+  wp_register_style('apss-one-proposal', plugins_url('assets/demo.css', __FILE__), [], '1.2.0');
 });
 add_shortcode('apss_one_demo', function () {
   wp_enqueue_style('apss-one-proposal');
@@ -25,6 +25,7 @@ add_shortcode('apss_one_demo', function () {
     ['ExCo & Governance','Committee permissions, nominations, handovers, approvals, task history and secure documents.','Role-aware workflow console, approval queues and governance repository links.','Summaries and action tracking'],
     ['Reports & Analytics','Membership growth, renewal rate, event attendance, PD progress, finances and exports.','Unified dashboard with filtered operational reports and authorised exports.','Natural-language report assistance']
   ];
+  $appendix_details = require plugin_dir_path(__FILE__) . "includes/appendix-details.php";
   ob_start(); ?>
   <div class="apss-rfq" id="rfq-top">
     <div class="rfq-utility"><span>CONFIDENTIAL · INVITED APSS REVIEWERS</span><span>APSS RFP 2026/01 · Proposal reference</span></div>
@@ -80,13 +81,13 @@ add_shortcode('apss_one_demo', function () {
       <tr><td><strong>Dedicated VPS Hosting</strong></td><td>APSS-owned infrastructure, storage, backups, security and continuity.</td><td><a href="#appendix-VPS">Dedicated VPS infrastructure — VPS ↗</a></td><td><span class="rfq-cost-empty">&nbsp;</span></td></tr>
       <tr><td><strong>AI API Usage</strong></td><td>Optional AI speaker matching, member support and assisted operations.</td><td><a href="#appendix-AI">Groq / OpenAI usage model — AI ↗</a></td><td><span class="rfq-cost-empty">&nbsp;</span></td></tr>
       </tbody></table></div>
-      <div class="rfq-note">The matrix is a conceptual module summary, not yet the complete 221-item compliance response. Cost cells have deliberately been left blank.</div>
+      <div class="rfq-note">The matrix is a conceptual module summary, not yet the complete 221-item compliance response. Cost cells have deliberately been left blank.</div><div class="rfq-gap-audit"><h3>Additional compulsory project-wide requirements</h3><p>The module summaries above do not replace separate commitments for security and PDPA, migration from the six existing tools, single sign-on, APSS account and source/data ownership, volunteer usability, 2,000-member/10,000-contact capacity, testing/UAT, training, support response times, warranty, backups, restoration, three-year total cost and Appendix A. These must be priced and addressed explicitly before submitting the quotation.</p></div>
     </section>
     <section class="rfq-section" id="appendices">
       <div class="rfq-head"><span class="rfq-eyebrow">TECHNICAL APPENDICES</span><h2>How the proposed solution will work.</h2><p>Each appendix explains the expected workflow, implementation approach and AI opportunity. These modules would be developed specifically for APSS rather than installed as a legacy CRM.</p></div>
       <div class="rfq-appendix-list">
       <?php foreach($modules as $i=>$m): $code=sprintf('A%02d',$i+1); ?>
-      <article class="rfq-appendix" id="appendix-<?php echo esc_attr($code); ?>"><div class="rfq-appendix-head"><span>APPENDIX <?php echo esc_html($code); ?></span><a href="#feature-matrix">↑ Return to matrix</a></div><h3><?php echo esc_html($m[0]); ?></h3><h4>APSS requirement</h4><p><?php echo esc_html($m[1]); ?></p><h4>Our recommended custom development</h4><p><?php echo esc_html($m[2]); ?></p><h4>Optional AI enhancement</h4><p><?php echo esc_html($m[3]); ?></p><div class="rfq-appendix-foot">Delivery: Proposed · Detailed acceptance criteria and SGD cost to be confirmed</div></article>
+      <article class="rfq-appendix" id="appendix-<?php echo esc_attr($code); ?>"><div class="rfq-appendix-head"><span>APPENDIX <?php echo esc_html($code); ?></span><a href="#feature-matrix">↑ Return to matrix</a></div><h3><?php echo esc_html($m[0]); ?></h3><h4>APSS requirement</h4><p><?php echo esc_html($m[1]); ?></p><h4>Our recommended custom development</h4><p><?php echo esc_html($m[2]); ?></p><h4>How the module will work in everyday use</h4><ul class="rfq-plain-list"><?php foreach(($appendix_details[$i][1] ?? []) as $step): ?><li><?php echo esc_html($step); ?></li><?php endforeach; ?></ul><h4>How AI could help APSS</h4><p><?php echo esc_html($appendix_details[$i][2][0] ?? $m[3]); ?></p><p class="rfq-rfp-ref">RFP coverage: <?php echo esc_html($appendix_details[$i][0] ?? 'Scope mapping pending'); ?> · Proposal summary, not full item-level compliance.</p><div class="rfq-appendix-foot">Delivery: Proposed · Detailed acceptance criteria and SGD cost to be confirmed</div></article>
       <?php endforeach; ?>
       <article class="rfq-appendix" id="appendix-VPS"><div class="rfq-appendix-head"><span>APPENDIX VPS</span><a href="#feature-matrix">↑ Return to matrix</a></div><h3>Dedicated APSS-owned VPS and Hosting</h3><p>We recommend a dedicated virtual private server for the production application, with APSS retaining ownership of hosting, domain and critical accounts. Scope includes environment setup, HTTPS, database, secured storage, scheduled backups, restore testing, monitoring, software updates and documented disaster recovery.</p><p>Server capacity and region will be sized during discovery based on member activity, media and file storage, events, uptime targets and privacy requirements. Video storage and email delivery may require separate providers.</p><div class="rfq-appendix-foot">One-time VPS setup: SGD ______ · VPS monthly: SGD ______ · Backup/storage monthly: SGD ______ · Maintenance monthly: SGD ______</div></article>
       <article class="rfq-appendix" id="appendix-AI"><div class="rfq-appendix-head"><span>APPENDIX AI</span><a href="#feature-matrix">↑ Return to matrix</a></div><h3>AI Model and API Operating Costs</h3><p>Optional Groq and OpenAI API services may power speaker matching, approved knowledge retrieval, administrative drafting and guided enquiries. We propose server-side credentials, role limits, redaction where appropriate, usage metering, cost ceilings, approval gates and an APSS-controlled provider configuration.</p><p>Costs are usage-based and depend on selected models, token consumption, request volumes, document retrieval and optional speech/other services. Actual model prices should be entered at quotation finalisation.</p><div class="rfq-appendix-foot">Groq API monthly estimate: SGD ______ · OpenAI API monthly estimate: SGD ______ · AI integration/setup: SGD ______</div></article>
