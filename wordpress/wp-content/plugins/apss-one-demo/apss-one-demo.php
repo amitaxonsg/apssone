@@ -1,172 +1,89 @@
 <?php
 /**
- * Plugin Name: APSS One Demo Interface
- * Description: APSS One presentation portal. All example data is synthetic; live custom membership engine integration is a future phase.
- * Version: 0.8.0
+ * Plugin Name: APSS One RFQ Proposal
+ * Description: Private APSS One digital transformation RFQ and quotation reference.
+ * Version: 1.0.0
  * Requires PHP: 8.1
  */
 if (!defined('ABSPATH')) exit;
 add_action('wp_enqueue_scripts', function () {
-    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.8.0');
+  wp_register_style('apss-one-proposal', plugins_url('assets/demo.css', __FILE__), [], '1.0.0');
 });
 add_shortcode('apss_one_demo', function () {
-    wp_enqueue_style('apss-one-demo');
-    $logo = 'https://www.asiaspeakers.org/wp-content/uploads/2020/06/logo_2-1.png';
-    $groups = [
-      'Members' => [
-        ['Membership & Renewals','users','Applications, AM/PM/CSP levels, approvals, renewal reminders and payment history.','Application → review → approval → active membership → renewal','custom membership engine integration'],
-        ['Speaker Directory','mic-2','Public speaker profiles, expertise, languages, industry focus and enquiries.','Member updates profile → eligibility check → public listing','Custom module'],
-        ['Member Journey','route','Seven growth stages: Discover, Join, Belong, Develop, Build, Lead, Legacy.','Engagement evidence → milestone → next recommended action','Custom module'],
-      ],
-      'Engagement' => [
-        ['Events & Check-in','calendar','Meetings, workshops, member pricing, RSVP, QR check-in and attendance.','Create event → register → attend → update member record','custom membership engine extension'],
-        ['Communities & SIGs','messages','Special Interest Groups, member discussions, announcements and resource sharing.','Join eligible group → collaborate → receive digests','Custom module'],
-        ['Convention & Awards','trophy','Multi-day conference passes, speaker submissions, awards and judging.','Submit → review → register → check in','Custom module'],
-      ],
-      'Learning' => [
-        ['Professional Development','graduation','Four assessed Core Modules and 26 electives across four skill areas.','Enrol → learn → assess → record outcome','Custom module'],
-        ['CPD & Certifications','award','Assessor rubrics, evidence uploads, resits, points and certificates.','Submit evidence → independent assessment → certification','Custom module'],
-        ['Mentoring','handshake','Mentor matching, cycles, sessions and learning progress.','Request mentor → match → log sessions → review','Custom module'],
-      ],
-      'Operations' => [
-        ['Communications','mail','Member segments, newsletters, event notices, consent and scheduled reminders.','Choose segment → approve → send → report','CiviMail integration'],
-        ['Finance & Xero Cloud','wallet','Membership fees, event payments, invoices, receipts, refunds and automated reconciliation with Xero Cloud.','custom membership engine records payment → authorised connector syncs invoice/payment/refund to Xero → reconciliation and exception monitoring','custom membership engine + custom Xero Cloud API connector'],
-        ['ExCo Administration','shield','Portfolio roles, approvals, committee handovers, audit trails and reports.','Task assigned → approval → audit → handover','Custom module'],
-      ],
-      'AI & Insights' => [
-        ['AI Speaker Match','sparkles','Match public, approved speaker profiles to enquiries.','Visitor describes event → AI recommends speakers','Optional Groq integration'],
-        ['AI Member Assistant','bot','Membership FAQs, events and course recommendations from approved materials.','Ask question → grounded answer → relevant action','Optional Groq integration'],
-        ['Analytics & Reporting','chart','Growth, retention, event attendance, PD completion and dashboards.','Choose metric → filter → view or export','Custom reports'],
-      ]
-    ];
-    ob_start(); ?>
-    <div class="apss-one" id="apss-one">
-      <div class="apss-topbar"><span>ASIA PROFESSIONAL SPEAKERS SINGAPORE</span><span><span class="apss-dot"></span> AXON CONCEPT DEMONSTRATION</span></div>
-      <header class="apss-header">
-        <a class="apss-brand" href="#apss-one"><img src="<?php echo esc_url($logo); ?>" alt="Asia Professional Speakers Singapore logo" loading="lazy"><span><strong>APSS <em>One</em></strong><small>Your membership. Your community. One place.</small></span></a>
-        <nav class="apss-nav" aria-label="APSS One demo navigation"><a href="#apss-journey">Member journey</a><a href="#apss-directory">Speakers</a><a href="#apss-membership-demo">Membership</a><a href="#apss-features">Platform</a><a href="#apss-ai">AI roadmap</a></nav>
-        <span class="apss-preview-pill">● Concept preview</span>
-      </header>
-      <section class="apss-hero">
-        <div class="apss-hero-copy">
-          <div class="apss-kicker">A NEW DIGITAL HOME FOR APSS</div>
-          <h1>One community.<br><span>Limitless possibilities.</span></h1>
-          <p>A unified experience connecting professional speakers to their community, learning, events, and opportunities — all powered by one member record.</p>
-          <div class="apss-actions"><a class="apss-primary" href="#apss-features">Explore the experience <span>↗</span></a><a class="apss-secondary" href="#apss-journey">See the member journey →</a></div>
-          <div class="apss-hero-note">Prototype only · No real membership data · No live transactions</div>
-        </div>
-        <div class="apss-hero-panel" aria-label="Illustrative member dashboard">
-          <div class="apss-windowbar"><span>APSS ONE / MEMBER OVERVIEW</span><span>● ● ●</span></div>
-          <div class="apss-avatarline"><div class="apss-avatar">AS</div><div><b>Welcome back, Alex</b><small>Professional member · Illustrative profile</small></div><span class="apss-active">Active (demo)</span></div>
-          <div class="apss-mini-grid"><div><small>Journey stage</small><b>Build</b><span>Business & visibility</span></div><div><small>Core modules</small><b>3 / 4</b><span>Illustrative progress</span></div></div>
-          <div class="apss-progress-title"><span>Professional development</span><b>75%</b></div><div class="apss-progress"><i></i></div>
-          <div class="apss-upcoming"><span class="apss-date"><b>24</b><small>NOV</small></span><div><b>Monthly Member Meeting</b><small>Event example · Registration coming soon</small></div><span>↗</span></div>
-          <div class="apss-panel-foot">This panel uses fictional data and demonstrates the planned experience.</div>
-        </div>
-      </section>
-      <section class="apss-value"><div><b>One member record</b><span>Across programmes and activities</span></div><div><b>One login</b><span>For members and volunteers</span></div><div><b>One connected experience</b><span>From discovery to legacy</span></div></section>
-      <section id="apss-journey" class="apss-section apss-journey">
-        <div class="apss-section-heading"><div><div class="apss-kicker dark">BUILT AROUND EVERY SPEAKER</div><h2>Every milestone, connected.</h2></div><p>Track the seven stages of the APSS membership and speaker growth journey — from your first connection to a lasting legacy.</p></div>
-        <div class="apss-steps"><?php foreach (['Discover','Join','Belong','Develop','Build','Lead','Legacy'] as $i=>$step): ?><div class="apss-step"><span><?php echo esc_html(sprintf('%02d',$i+1)); ?></span><b><?php echo esc_html($step); ?></b></div><?php endforeach; ?></div>
-        <div class="apss-disclaimer">Journey tracking and eligibility automation are planned features, not implemented in this prototype.</div>
-      </section>
-      <section id="apss-features" class="apss-section apss-features">
-        <div class="apss-section-heading"><div><div class="apss-kicker dark">THE COMPLETE PLATFORM VISION</div><h2>Everything APSS needs.<br><span>Beautifully connected.</span></h2></div><p>Explore each module to understand its proposed member experience and workflow. Select any card to expand the feature concept.</p></div>
-        <div class="apss-legend"><span class="apss-tag">Coming soon</span> Indicates planned functionality, not active services</div>
-        <?php foreach ($groups as $group=>$modules): ?>
-          <div class="apss-group" <?php if ($group==='AI & Insights') echo 'id="apss-ai"'; ?>><h3><?php echo esc_html($group); ?></h3><div class="apss-grid">
-            <?php foreach ($modules as $i=>$m): ?>
-            <details class="apss-tile"><summary><span class="apss-icon" aria-hidden="true"><?php echo esc_html(['Members'=>'◎','Engagement'=>'◇','Learning'=>'✦','Operations'=>'▤','AI & Insights'=>'✳'][$group]); ?></span><span class="apss-tag">Coming soon</span><h4><?php echo esc_html($m[0]); ?></h4><p><?php echo esc_html($m[2]); ?></p><span class="apss-open">Explore concept <span>↗</span></span></summary><div class="apss-tile-details"><b>How it will work</b><p><?php echo esc_html($m[3]); ?></p><small>Proposed implementation: <?php echo esc_html($m[4]); ?>. This is a planned capability, not an operational feature.</small></div></details>
-            <?php endforeach; ?>
-          </div></div>
-        <?php endforeach; ?>
-      </section>
-      <section id="apss-directory" class="apss-section apss-speaker-showcase">
-        <div class="apss-section-heading"><div><div class="apss-kicker dark">EXISTING APSS CONTENT · DIRECTORY REFERENCE</div><h2>Professional speakers,<br><span>one searchable network.</span></h2></div><p>The current APSS directory already contains public member profiles. These examples show what APSS One can retain and improve, with member-controlled updates and automatic eligibility once connected to custom membership engine.</p></div>
-        <div class="apss-directory-tools"><label for="apss-speaker-search">Explore example public listings</label><input id="apss-speaker-search" type="search" placeholder="Search speaker or topic" oninput="const q=this.value.toLowerCase();document.querySelectorAll('#apss-speaker-results .apss-speaker').forEach(el=>{el.hidden=!el.textContent.toLowerCase().includes(q)})" aria-controls="apss-speaker-results"></div>
-        <div id="apss-speaker-results" class="apss-speaker-grid">
-        <?php
-        $public_speakers = [
-          ['Mette Johansson, CSP','Motivation · Leadership'],
-          ['Andrew Chow, CSP','Marketing · Social Media · Technology'],
-          ['Dr. Tanvi Gautam, CSP','Leadership · Change Management · Communication'],
-          ['Tracey McGrath, CSP','Management · Leadership · Conflict Resolution'],
-          ['Adeline Tiah','Leadership · Marketing · Personal Development'],
-          ['C.J. Ng, CSP','Sales · Negotiation'],
-        ];
-        foreach ($public_speakers as $speaker) : ?>
-          <article class="apss-speaker"><div class="apss-speaker-initial" aria-hidden="true"><?php echo esc_html(mb_substr($speaker[0],0,1)); ?></div><div><h3><?php echo esc_html($speaker[0]); ?></h3><p><?php echo esc_html($speaker[1]); ?></p><span>Public directory reference</span></div></article>
-        <?php endforeach; ?>
-        </div>
-        <div class="apss-quote-disclaimer"><strong>Source and status:</strong> These names and speaking categories are examples from the existing <a href="https://www.asiaspeakers.org/members/" target="_blank" rel="noopener noreferrer">APSS public members directory ↗</a>. The entries are not imported into this demo's custom membership engine database; their current membership eligibility and permission to reuse photos or biographies have not been verified. The filter above works on these public-reference cards only. Production migration will require APSS's approved export and validation.</div>
-      </section>
-      <section id="apss-membership-demo" class="apss-section apss-membership-showcase">
-        <div class="apss-section-heading"><div><div class="apss-kicker dark">PROPOSED MEMBERSHIP SOLUTION</div><h2>Membership designed around APSS.</h2></div><p>WordPress hosts the RFQ reference and branded APSS experience. Membership applications, approvals, renewals and speaker eligibility are proposed custom workflows; no membership engine or checkout is currently active.</p></div>
-        <div class="apss-membership-plans">
-          <article><div class="apss-plan-tag">ASSOCIATE MEMBER · AM</div><h3>S$350 <small>/ year</small></h3><p>For emerging speakers building their skills, network and professional journey.</p><div class="apss-plan-status">Proposed feature · Coming Soon</div></article>
-          <article><div class="apss-plan-tag">PROFESSIONAL MEMBER · PM</div><h3>S$390 <small>/ year</small></h3><p>For established professional speakers, with public speaker-directory eligibility subject to active status.</p><div class="apss-plan-status">Proposed feature · Coming Soon</div></article>
-          <article><div class="apss-plan-tag">CSP RECOGNITION</div><h3>Credential <small>status</small></h3><p>Professional designation verification and continuing membership eligibility, with APSS/GSF rules.</p><div class="apss-plan-status">Custom verification · Coming Soon</div></article>
-        </div>
-        <div class="apss-quote-disclaimer"><strong>Platform status:</strong> WordPress and custom membership engine are operational foundations. This section is a quotation walkthrough, not a live checkout, membership application, or customer portal. No actual member transactions are being accepted.</div>
-      </section>
-      <section id="apss-architecture" class="apss-section apss-architecture">
-        <div class="apss-section-heading"><div><div class="apss-kicker dark">PROPOSED OPEN-SOURCE FOUNDATION</div><h2>One platform. Built for APSS.</h2></div><p>This quotation reference presents a single branded experience delivered with WordPress, custom membership engine and APSS-specific extensions.</p></div>
-        <div class="apss-tech-grid">
-          <article><span>FOUNDATION 01</span><h3>WordPress</h3><p>Public website, searchable speaker pages, visual editing, user experience and customised member dashboards.</p><a href="https://wordpress.org/" target="_blank" rel="noopener noreferrer">WordPress project ↗</a></article>
-          <article><span>FOUNDATION 02</span><h3>Modular application backend</h3><p>Central contact and member records, membership levels and renewals, contributions, standard events, email segments and reports. Custom extensions connect the specialist APSS workflows to its records.</p><a href="https://civicrm.org/" target="_blank" rel="noopener noreferrer">Explore custom membership engine ↗</a></article>
-          <article><span>ACCOUNTING INTEGRATION</span><h3>Xero Cloud</h3><p>Xero stays APSS’s accounting system. A proposed secure sync sends approved invoices, payments, refunds and contact references from APSS One to Xero, with mapping, reconciliation, retry logs and duplicate controls.</p><a href="https://www.xero.com/sg/" target="_blank" rel="noopener noreferrer">Xero Cloud ↗</a></article>
-        </div>
-        <div class="apss-architecture-note"><strong>Integration boundaries:</strong> WordPress and custom membership engine are the proposed foundation, not yet a live custom membership engine connection in this demo. Xero Cloud sync is proposed custom development and requires an authorised APSS Xero connection, validation of accounting rules and API testing.</div>
-      </section>
-      <section class="apss-section apss-rfp-overview">
-        <div class="apss-section-heading"><div><div class="apss-kicker dark">RFP / DELIVERABLE EXPLANATION</div><h2>What we will develop.</h2></div><p>Each module below will be built on the shared membership foundation. The cards above describe the individual workflow; this table shows the development approach for APSS decision-makers.</p></div>
-        <div class="apss-table-scroll"><table class="apss-rfp-table"><thead><tr><th>Requested module</th><th>Foundation and custom scope</th><th>Proposal status</th></tr></thead><tbody>
-        <?php
-          $plans = [
-            ['Membership services & journeys','custom membership engine membership, custom approval flow, seven-stage tracking, configurable AM/PM/CSP pathways and renewal automation.'],
-            ['Speaker directory','WordPress public profile pages, custom membership engine membership eligibility checks, expertise filters, enquiry routing and member self-editing.'],
-            ['Community and SIGs','Custom protected groups, discussions, notifications, moderation, member permissions and resource sharing.'],
-            ['Events','CiviEvent-based event records plus custom ticket rules, check-in, attendance, organisers and specialised formats.'],
-            ['Convention','Custom passes, multi-day sessions, ticketing, sponsor views and exports linked to custom membership engine contact records.'],
-            ['Professional development','Custom course catalogue, protected learning resources, assessments, 4 Core Modules, 26 electives, CPD and mentoring rules.'],
-            ['Communications','CiviMail and consent segmentation plus APSS-specific templates, automations, deliverability provider and scheduling.'],
-            ['Finance & Xero Cloud','custom membership engine payments/invoices and a custom approved sync to Xero for invoices, payment status, refunds, reconciliation and exceptions.'],
-            ['Public website','WordPress page templates, content management, SEO, responsive layouts and member-directory integration.'],
-            ['ExCo & administration','Role-based approvals, delegated portfolio access, tasks, audit events, committee handovers and data safeguards.'],
-            ['Reports & analytics','Unified member, renewals, events, learning and financial reporting; CSV/Excel exports and ExCo-only metrics.'],
-            ['Migration, integration & security','Data matching from existing tools, staging, backups, PDPA procedures, single login and handover documentation.']
-          ];
-          foreach ($plans as $plan) {
-            echo '<tr><th scope="row">'.esc_html($plan[0]).'</th><td>'.esc_html($plan[1]).'</td><td><span class="apss-tag">Coming soon</span></td></tr>';
-          }
-        ?>
-        </tbody></table></div>
-        <p class="apss-disclaimer">This is a proposal-reference explanation, not a completed compliance matrix or a fixed-price offer. Final requirement commitments are documented separately against the APSS RFP.</p>
-      </section>
-      <section id="apss-delivery" class="apss-section apss-quotation-guide">
-        <div class="apss-section-heading"><div><div class="apss-kicker dark">PROPOSAL WALKTHROUGH</div><h2>From concept to delivery.</h2></div><p>Use this view alongside the formal quotation to distinguish the current demonstrator from the planned production system.</p></div>
-        <div class="apss-quotation-grid">
-          <div class="apss-quote-card"><span class="apss-quote-num">01 / FOUNDATION</span><h3>Unified membership</h3><p>WordPress serves the branded experience. custom membership engine is proposed for a single member record, memberships, renewals, contacts, payments and standard events.</p><b>Next development milestone</b><small>custom membership engine installation, member roles, synthetic records and basic status-based workflows.</small></div>
-          <div class="apss-quote-card"><span class="apss-quote-num">02 / SPECIALIST MODULES</span><h3>Built around APSS</h3><p>Custom speaker-directory eligibility, community spaces, learning, assessments, CPD, mentoring, competitions and ExCo workflows.</p><b>Planned / Coming Soon</b><small>Detailed scope and acceptance criteria to be confirmed against the 221-item RFP compliance matrix.</small></div>
-          <div class="apss-quote-card"><span class="apss-quote-num">03 / CONNECTED SERVICES</span><h3>APSS-operated ecosystem</h3><p>Planned integrations with Xero, Zoom, Google Workspace and payment/email providers, with ownership and access controlled by APSS.</p><b>Planned / Coming Soon</b><small>Integrations, migration and operating costs must appear separately in the formal quotation.</small></div>
-          <div class="apss-quote-card"><span class="apss-quote-num">04 / OPTIONAL INTELLIGENCE</span><h3>AI with oversight</h3><p>Optional Groq-backed speaker matching, FAQs and administrative drafting using only approved data and permission-limited application tools.</p><b>Phase 2 concept</b><small>No live AI calls, payment changes or member-data access are enabled in this demo.</small></div>
-        </div>
-        <div class="apss-quote-disclaimer"><strong>Quotation note:</strong> This demonstration explains proposed workflows; it is not proof that a requirement has been delivered. The signed RFP response, fixed-price schedule, architecture, testing criteria and implementation plan remain the authoritative scope.</div>
-      </section>
-      <section class="apss-ai-banner"><div><div class="apss-kicker">OPTIONAL PHASE 2 · GROQ API</div><h2>Intelligence that helps people connect.</h2><p>Future AI-powered speaker discovery, membership guidance, and staff-assisted reporting — with strict permissions, approved data and human oversight.</p><span>API service is not connected in this demo.</span></div><div class="apss-ai-mark" aria-hidden="true">✳</div></section>
-      <footer class="apss-footer"><div><b>APSS <em>One</em></b><p>A concept proposal by Axon 1Pro Solutions</p></div><div>Built on a proposed WordPress + proposed custom modules foundation.<br>All showcased content is illustrative. Features marked Coming Soon are not implemented.</div></footer>
-    </div>
-    <?php return ob_get_clean();
+  wp_enqueue_style('apss-one-proposal');
+  $modules = [
+    ['Membership & Member Journey','Central record, applications, approval, AM/PM/CSP eligibility, renewal rules and seven-stage growth journey.','Proposed custom member records, application forms, renewal workflows, approval queues and member self-service.','AI-assisted onboarding and renewal prompts'],
+    ['Speaker Directory & Profiles','Searchable public speakers, biographies, credentials, expertise and active membership controls.','Profile editor, verified listing rules, category filters, enquiry routing and member-controlled public visibility.','AI speaker-to-buyer matching'],
+    ['Communities & SIGs','Private groups, posts, resources, announcements, moderation and digest notifications.','APSS-managed group spaces linked to member eligibility, leadership and access controls.','AI summarisation of approved group resources'],
+    ['Events & Registration','Member meetings, RSVP, tickets, check-in, presenters and attendance counting.','Templates, pricing, free RSVP, registrations, attendance and progression evidence.','Event planning and reminder suggestions'],
+    ['Convention & Awards','Multi-day Convention passes, competitions, nominations, scoring and sponsors.','Custom convention pages and ticket workflows, submissions, judging and reports.','Draft communications and schedules'],
+    ['Professional Development','Four assessed Core Modules, 26 electives, materials, rubrics, resits and progress.','Custom learning catalogue, assessment workflow, content access, recorded evidence and progress tracking.','Relevant learning recommendations'],
+    ['CPD, CSP & Mentoring','Points, certificates, eligibility, mentor allocation, meetings and learning reports.','CPD ledger, reviewer permissions, qualification criteria, mentor cycles and certificates.','Mentoring and progression suggestions'],
+    ['Communications','Segmented newsletters, consent, automated notifications and templates.','Central communication preferences, reusable messages, campaign workflows and deliverability integration.','AI-assisted drafts with human approval'],
+    ['Payments & Xero Cloud','Invoices, membership and event fees, refunds, reconciliation and financial exports.','Unified transactional records and proposed secure Xero Cloud sync with mapping and audit logs.','Exception detection and finance summaries'],
+    ['Public Website','APSS-branded content, articles, SEO, programme pages and speaker listings.','WordPress content management with modern layouts and integration to future application services.','Editorial drafts and content discovery'],
+    ['ExCo & Governance','Committee permissions, nominations, handovers, approvals, task history and secure documents.','Role-aware workflow console, approval queues and governance repository links.','Summaries and action tracking'],
+    ['Reports & Analytics','Membership growth, renewal rate, event attendance, PD progress, finances and exports.','Unified dashboard with filtered operational reports and authorised exports.','Natural-language report assistance']
+  ];
+  ob_start(); ?>
+  <div class="apss-rfq" id="rfq-top">
+    <div class="rfq-utility"><span>CONFIDENTIAL · INVITED APSS REVIEWERS</span><span>APSS RFP 2026/01 · Proposal reference</span></div>
+    <header class="rfq-header">
+      <div class="rfq-brand"><img src="<?php echo esc_url('https://www.asiaspeakers.org/wp-content/uploads/2020/06/logo_2-1.png'); ?>" alt="APSS logo" /><span class="rfq-separator">×</span><img class="rfq-axon-logo" src="<?php echo esc_url('https://1prohost.com/assets/axon-1pro-logos-B9lV4mEm.png'); ?>" alt="Axon 1Pro logo" /></div>
+      <nav aria-label="Proposal sections"><a href="#executive">Overview</a><a href="#requirements">Requirements</a><a href="#solutions">Solutions</a><a href="#ai">AI</a><a href="#integrations">Integrations</a><a href="#quotation">Quotation</a></nav>
+    </header>
+    <section class="rfq-hero" id="executive">
+      <div class="rfq-overline">A DIGITAL TRANSFORMATION PROPOSAL FOR ASIA PROFESSIONAL SPEAKERS SINGAPORE</div>
+      <h1>APSS One<span>One connected association.<br />Built around its people.</span></h1>
+      <p>Axon 1Pro's proposal for a unified membership, professional development, events, community and administration experience — designed around APSS's unique processes, governance and long-term ownership.</p>
+      <div class="rfq-buttons"><a href="#solutions" class="rfq-btn-primary">Explore proposed solutions ↗</a><a href="#quotation" class="rfq-btn-secondary">View quotation status →</a></div>
+      <div class="rfq-fine">Concept and scope reference · Not a completed production platform · Commercial quotation pending approval</div>
+    </section>
+    <section class="rfq-section">
+      <div class="rfq-head"><span class="rfq-eyebrow">01 / EXECUTIVE SUMMARY</span><h2>One member journey. Fewer disconnected systems.</h2><p>APSS currently operates across multiple tools and separate member records. We recommend a future-ready APSS-owned solution with one identity, centralised member data and clear workflows that volunteers can operate.</p></div>
+      <div class="rfq-stat-grid"><div><b>One</b><span>Member identity and record</span></div><div><b>Three</b><span>Lead pillars: Membership, PD, Events</span></div><div><b>221</b><span>RFP requirements to address</span></div><div><b>APSS-owned</b><span>Data, hosting and key accounts</span></div></div>
+      <div class="rfq-note">The final architecture is subject to discovery and approval. WordPress powers this quotation website; it is not being presented as the complete application engine.</div>
+    </section>
+    <section class="rfq-section alt" id="requirements">
+      <div class="rfq-head"><span class="rfq-eyebrow">02 / RFP REQUIREMENTS</span><h2>We understand what APSS needs.</h2><p>The APSS One specification describes 221 requirements: 138 Must, 68 Should and 15 Could, spanning functional modules, security, privacy and migration. Our detailed item-by-item compliance response will accompany the formal quotation.</p></div>
+      <div class="rfq-pillars"><article><strong>Membership Services</strong><p>Member lifecycle, onboarding, renewals, professional levels and growth tracking.</p></article><article><strong>Professional Development</strong><p>Core Modules, electives, assessments, CPD, mentoring and certification progression.</p></article><article><strong>Events & Community</strong><p>Meetings, SIGs, groups, ticketing, Convention and participation evidence.</p></article></div>
+      <div class="rfq-note">The complete RFP response, Appendix A pricing schedule and acceptance criteria will determine final commitments; this site summarises our direction.</div>
+    </section>
+    <section class="rfq-section" id="solutions">
+      <div class="rfq-head"><span class="rfq-eyebrow">03 / OUR PROPOSED SOLUTIONS</span><h2>Designed module by module.</h2><p>Every card connects an APSS requirement to a proposed implementation and an optional AI enhancement. Expand each module for the intended workflow. All production modules are <strong>Coming Soon</strong> and subject to approved project scope.</p></div>
+      <div class="rfq-module-grid">
+      <?php foreach($modules as $index=>$m): ?>
+        <details class="rfq-module"><summary><span class="rfq-index"><?php echo esc_html(sprintf('%02d',$index+1)); ?></span><span class="rfq-coming">Coming Soon</span><h3><?php echo esc_html($m[0]); ?></h3><p><?php echo esc_html($m[1]); ?></p><span class="rfq-expand">Read proposed workflow ↗</span></summary><div class="rfq-module-body"><b>Proposed solution</b><p><?php echo esc_html($m[2]); ?></p><b>AI opportunity</b><p><?php echo esc_html($m[3]); ?></p></div></details>
+      <?php endforeach; ?>
+      </div>
+    </section>
+    <section class="rfq-section rfq-ai" id="ai">
+      <div class="rfq-head"><span class="rfq-eyebrow">04 / AI & AUTOMATION</span><h2>AI as an assistant, not a replacement for oversight.</h2><p>Using a cost-controlled language-model API such as Groq, we can propose speaker discovery, membership guidance, document search, communications drafting and authorised administration reports.</p></div>
+      <div class="rfq-pillars"><article><strong>Speaker Match</strong><p>Find speakers from approved public directory attributes and explain their relevance.</p></article><article><strong>Member Concierge</strong><p>Guide onboarding, renewals, programme discovery and commonly asked questions.</p></article><article><strong>ExCo Copilot</strong><p>Draft reports, meeting summaries and action lists from permitted information.</p></article></div>
+      <div class="rfq-note">Optional Phase 2. No Groq API connection, autonomous sending or access to actual APSS member records is enabled on this reference website. Permission boundaries and PDPA review are mandatory.</div>
+    </section>
+    <section class="rfq-section alt" id="integrations">
+      <div class="rfq-head"><span class="rfq-eyebrow">05 / CONNECTED SYSTEMS</span><h2>Keep the tools APSS needs. Connect the information.</h2><p>APSS intends to retain Xero, Google Workspace and Zoom. Our proposal connects them securely to the member and operational records, rather than requiring another disconnected process.</p></div>
+      <div class="rfq-integrations"><article><strong>Xero Cloud</strong><p>Proposed invoice, payment and refund synchronisation with accounting mappings and reconciliation.</p></article><article><strong>Google Workspace</strong><p>Governance document links, access controls and optional authorised Google sign-in.</p></article><article><strong>Zoom</strong><p>Session links and potential attendance integration subject to API feasibility.</p></article><article><strong>Payment & Communications</strong><p>Preferred gateway, transactional emails, notifications and consent management.</p></article></div>
+    </section>
+    <section class="rfq-section" id="why-axon">
+      <div class="rfq-head"><span class="rfq-eyebrow">WHY AXON 1PRO</span><h2>A relationship with APSS dating back to at least 2011.</h2><p>We understand APSS beyond the requirements document. Our historical correspondence records ongoing assistance with APSS technology, email and website management, and domain services across successive committees and administrators.</p></div>
+      <div class="rfq-timeline"><div><b>2011</b><p>Recorded support for APSS domain email forwarding and technical assistance to its team.</p></div><div><b>2016–2019</b><p>Website hosting, ExCo page updates, speaker-directory support, technical troubleshooting and proposals.</p></div><div><b>2026</b><p>Continuing APSS domain-provider relationship, support enquiries from Irene and an AI-powered platform recommendation.</p></div></div>
+      <div class="rfq-note">These milestones are grounded in Axon's historical email correspondence. They establish documented support since at least 2011, not uninterrupted website hosting throughout that period.</div>
+    </section>
+    <section class="rfq-section rfq-quote" id="quotation">
+      <div class="rfq-head"><span class="rfq-eyebrow">06 / IMPLEMENTATION & QUOTATION</span><h2>A transparent, phased investment.</h2><p>The formal commercial submission will set out discovery, design, development, migration, security, testing, support, recurring services and optional AI enhancements, including a three-year total cost.</p></div>
+      <div class="rfq-quote-actions"><div><b>View / Download Quote</b><p>Quotation PDF and complete Appendix A will be linked here after the approved document is uploaded.</p></div><span class="rfq-unavailable">Document pending · Not available yet</span></div>
+      <div class="rfq-stage-grid"><div><strong>Discover & design</strong><p>Requirements mapping, workflows, data and architecture.</p></div><div><strong>Develop & integrate</strong><p>Priority modules and approved systems integrations.</p></div><div><strong>Test & migrate</strong><p>UAT, reconciliation, training and operational handover.</p></div><div><strong>Support & evolve</strong><p>Warranty, ongoing maintenance and optional AI roadmap.</p></div></div>
+    </section>
+    <footer class="rfq-footer"><div class="rfq-footer-brand">APSS One <span>×</span> Axon 1Pro</div><p>Confidential proposal reference · Prepared for APSS evaluation · Scope and pricing subject to the formal signed submission.</p><p>© <?php echo esc_html(date('Y')); ?> Axon 1Pro Solutions</p></footer>
+  </div>
+  <?php return ob_get_clean();
 });
-
-
-// Apply presentation-only template to the dedicated APSS One page.
-// Other WordPress pages, the dashboard and custom membership engine screens are untouched.
-add_filter('template_include', function ($template) {
-    if (is_admin() || !is_singular('page')) return $template;
-    $page = get_queried_object();
-    if (!$page || $page->post_name !== 'apss-one') return $template;
-    if (!has_shortcode((string) $page->post_content, 'apss_one_demo')) return $template;
-    $custom = plugin_dir_path(__FILE__) . 'templates/fullwidth.php';
-    return is_readable($custom) ? $custom : $template;
-}, 99);
+add_filter('template_include', function($template) {
+  if(is_admin() || !is_singular('page')) return $template;
+  $page=get_queried_object();
+  if(!$page || $page->post_name!=='apss-one' || !has_shortcode((string)$page->post_content,'apss_one_demo')) return $template;
+  $custom=plugin_dir_path(__FILE__).'templates/fullwidth.php';
+  return is_readable($custom)?$custom:$template;
+},99);
