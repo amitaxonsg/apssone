@@ -52,3 +52,5 @@ body.apss-demo-template{margin:0;background:#fff}body.apss-demo-template #main-c
 .rfq-appendix p{font-size:17px;color:#4f6970;line-height:1.7}
 .rfq-appendix-foot{font-size:14px;border-top:1px solid #cfdfdb;padding-top:15px;margin-top:24px;font-weight:700;color:#466c71}
 @media(max-width:850px){.rfq-appendix-list{grid-template-columns:1fr}.rfq-appendix{padding:23px}}
+
+.rfq-plain-list{padding-left:23px;margin:12px 0 22px}.rfq-plain-list li{font-size:17px;line-height:1.75;color:#455f66;margin-bottom:12px}.rfq-rfp-ref{font-size:13px!important;color:#627f85;border-top:1px solid #d8e6e1;padding-top:12px}.rfq-gap-audit{margin-top:26px;background:#f0f6f4;border-left:4px solid #c0994f;padding:20px 24px;border-radius:8px}.rfq-gap-audit h3{font-size:21px;margin:0 0 8px}.rfq-gap-audit p{font-size:16px;line-height:1.8;margin:0;color:#4c6b72}
