@@ -9,3 +9,5 @@ body.apss-demo-template .apss-one .apss-topbar,
 body.apss-demo-template .apss-one .apss-hero{max-width:none}
 body.apss-demo-template #wpadminbar{z-index:99999}
 @media(max-width:600px){body.apss-demo-template .apss-hero{min-width:0}}
+
+.apss-quotation-guide{background:#fff}.apss-quotation-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.apss-quote-card{border:1px solid #dfebe8;border-radius:14px;padding:30px;background:linear-gradient(145deg,#fff,#f6faf9)}.apss-quote-num{font-weight:800;font-size:11px;color:#0b8277;letter-spacing:.12em}.apss-quote-card h3{font-size:23px;letter-spacing:-.04em;margin:12px 0}.apss-quote-card p{font-size:14px;color:#556c73;min-height:76px}.apss-quote-card b{display:block;color:#165e58;font-size:12px}.apss-quote-card small{display:block;color:#6d858b;font-size:12px;margin-top:8px}.apss-quote-disclaimer{background:#f0f5f3;border-left:4px solid #1b8b80;border-radius:7px;padding:18px 22px;margin-top:20px;font-size:13px;color:#3d5b61}@media(max-width:650px){.apss-quotation-grid{grid-template-columns:1fr}.apss-quote-card p{min-height:0}}
