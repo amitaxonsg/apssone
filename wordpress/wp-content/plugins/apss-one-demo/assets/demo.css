@@ -34,3 +34,5 @@ body.apss-demo-template #wpadminbar{z-index:99999}
 .apss-rfp-overview>.apss-disclaimer{margin-top:17px;line-height:1.7}
 @media(max-width:1000px){.apss-tech-grid{grid-template-columns:1fr}.apss-tech-grid article{padding:25px}}
 @media(max-width:600px){.apss-one{font-size:16px}.apss-hero-copy>p{font-size:17px}.apss-tech-grid h3{font-size:26px}.apss-table-scroll{margin-right:-2vw}}
+
+.apss-membership-showcase{background:#f6faf8}.apss-membership-plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.apss-membership-plans article{background:#fff;border:1px solid #dbe8e4;border-radius:15px;padding:29px}.apss-plan-tag{font-size:12px;color:#0f7772;font-weight:800;letter-spacing:.1em}.apss-membership-plans h3{font-size:39px;letter-spacing:-.04em;margin:14px 0;color:#123a40}.apss-membership-plans h3 small{font-size:16px;font-weight:500;color:#758790}.apss-membership-plans p{font-size:16px;color:#526971;min-height:90px}.apss-plan-status{display:inline-block;font-size:13px;color:#7c612b;background:#fbf2df;padding:8px 11px;border-radius:8px}@media(max-width:850px){.apss-membership-plans{grid-template-columns:1fr}.apss-membership-plans p{min-height:0}}
