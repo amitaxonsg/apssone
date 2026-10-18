@@ -1,42 +1,88 @@
 <?php
 /**
  * Plugin Name: APSS One Demo Interface
- * Description: APSS One branded concept dashboard. Live CiviCRM membership functionality requires separate integration.
- * Version: 0.1.0
+ * Description: APSS One presentation portal. All example data is synthetic; live CiviCRM integration is a future phase.
+ * Version: 0.2.0
  * Requires PHP: 8.1
  */
-if (!defined('ABSPATH')) { exit; }
+if (!defined('ABSPATH')) exit;
 add_action('wp_enqueue_scripts', function () {
-    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.1.0');
+    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.2.0');
 });
 add_shortcode('apss_one_demo', function () {
     wp_enqueue_style('apss-one-demo');
     $logo = 'https://www.asiaspeakers.org/wp-content/uploads/2020/06/logo_2-1.png';
-    $modules = [
-        ['Membership & Renewals', 'Applications, membership levels, renewal schedules and receipts.', 'Foundation planned'],
-        ['Speaker Directory', 'Search public speakers and manage eligible profile listings.', 'Coming soon'],
-        ['Events & Registration', 'Meetings, registration, member prices and attendance.', 'Foundation planned'],
-        ['Professional Development', '4 Core Modules, 26 electives, assessment, CPD and mentoring.', 'Coming soon'],
-        ['SIGs & Community', 'Group discussions, private communities and member announcements.', 'Coming soon'],
-        ['Convention & Tickets', 'Multi-day events, passes, sponsor pages and check-in.', 'Coming soon'],
-        ['Member Journey', 'Discover, Join, Belong, Develop, Build, Lead and Legacy.', 'Coming soon'],
-        ['ExCo Administration', 'Secure portfolio roles, governance tasks and reporting.', 'Coming soon'],
-        ['AI Speaker Assistant', 'Optional Groq-backed public speaker search and FAQs.', 'AI concept'],
+    $groups = [
+      'Members' => [
+        ['Membership & Renewals','users','Applications, AM/PM/CSP levels, approvals, renewal reminders and payment history.','Application → review → approval → active membership → renewal','CiviCRM integration'],
+        ['Speaker Directory','mic-2','Public speaker profiles, expertise, languages, industry focus and enquiries.','Member updates profile → eligibility check → public listing','Custom module'],
+        ['Member Journey','route','Seven growth stages: Discover, Join, Belong, Develop, Build, Lead, Legacy.','Engagement evidence → milestone → next recommended action','Custom module'],
+      ],
+      'Engagement' => [
+        ['Events & Check-in','calendar','Meetings, workshops, member pricing, RSVP, QR check-in and attendance.','Create event → register → attend → update member record','CiviCRM extension'],
+        ['Communities & SIGs','messages','Special Interest Groups, member discussions, announcements and resource sharing.','Join eligible group → collaborate → receive digests','Custom module'],
+        ['Convention & Awards','trophy','Multi-day conference passes, speaker submissions, awards and judging.','Submit → review → register → check in','Custom module'],
+      ],
+      'Learning' => [
+        ['Professional Development','graduation','Four assessed Core Modules and 26 electives across four skill areas.','Enrol → learn → assess → record outcome','Custom module'],
+        ['CPD & Certifications','award','Assessor rubrics, evidence uploads, resits, points and certificates.','Submit evidence → independent assessment → certification','Custom module'],
+        ['Mentoring','handshake','Mentor matching, cycles, sessions and learning progress.','Request mentor → match → log sessions → review','Custom module'],
+      ],
+      'Operations' => [
+        ['Communications','mail','Member segments, newsletters, event notices, consent and scheduled reminders.','Choose segment → approve → send → report','CiviMail integration'],
+        ['Finance & Xero','wallet','Membership fees, tickets, refunds, invoice records and exports.','Approved charge → payment → receipt → reconciliation','CiviCRM + integration'],
+        ['ExCo Administration','shield','Portfolio roles, approvals, committee handovers, audit trails and reports.','Task assigned → approval → audit → handover','Custom module'],
+      ],
+      'AI & Insights' => [
+        ['AI Speaker Match','sparkles','Match public, approved speaker profiles to enquiries.','Visitor describes event → AI recommends speakers','Optional Groq integration'],
+        ['AI Member Assistant','bot','Membership FAQs, events and course recommendations from approved materials.','Ask question → grounded answer → relevant action','Optional Groq integration'],
+        ['Analytics & Reporting','chart','Growth, retention, event attendance, PD completion and dashboards.','Choose metric → filter → view or export','Custom reports'],
+      ]
     ];
     ob_start(); ?>
-    <div class="apss-one">
+    <div class="apss-one" id="apss-one">
+      <div class="apss-topbar"><span>ASIA PROFESSIONAL SPEAKERS SINGAPORE</span><span><span class="apss-dot"></span> AXON CONCEPT DEMONSTRATION</span></div>
       <header class="apss-header">
-        <div class="apss-brand"><img src="<?php echo esc_url($logo); ?>" alt="APSS logo"><div><strong>APSS One</strong><small>Unified Member Platform</small></div></div>
-        <span class="apss-demo-label">CONCEPT DEMO · SYNTHETIC DATA ONLY</span>
+        <a class="apss-brand" href="#apss-one"><img src="<?php echo esc_url($logo); ?>" alt="Asia Professional Speakers Singapore logo" loading="lazy"><span><strong>APSS <em>One</em></strong><small>Your membership. Your community. One place.</small></span></a>
+        <nav class="apss-nav" aria-label="APSS One demo navigation"><a href="#apss-journey">Member journey</a><a href="#apss-features">Platform</a><a href="#apss-ai">AI roadmap</a></nav>
+        <span class="apss-preview-pill">● Concept preview</span>
       </header>
-      <section class="apss-hero"><div class="apss-eyebrow">ONE LOGIN · ONE MEMBER RECORD · ONE EXPERIENCE</div><h1>Welcome to APSS One</h1><p>Your single destination for membership, speaker profiles, professional learning, events and community.</p><a href="#apss-modules" class="apss-button">Explore the platform →</a></section>
-      <section class="apss-journey"><h2>The APSS Member Journey</h2><p>Discover → Join → Belong → Develop → Build → Lead → Legacy</p><small>Illustrative journey; not connected to member records.</small></section>
-      <section id="apss-modules" class="apss-modules"><h2>Explore APSS One</h2><p>Open a module to see its planned capabilities. Functionality is not enabled unless explicitly marked as tested.</p><div class="apss-grid">
-        <?php foreach ($modules as $index => $module): ?>
-        <details class="apss-tile"><summary><span class="apss-count"><?php echo esc_html(sprintf('%02d', $index+1)); ?></span><strong><?php echo esc_html($module[0]); ?></strong><span class="apss-state"><?php echo esc_html($module[2]); ?></span><p><?php echo esc_html($module[1]); ?></p><span class="apss-more">View concept +</span></summary><div class="apss-details"><p><b>Planned experience:</b> <?php echo esc_html($module[1]); ?></p><p>No live submissions, member lookups or payment processing are enabled in this demonstration.</p></div></details>
+      <section class="apss-hero">
+        <div class="apss-hero-copy">
+          <div class="apss-kicker">A NEW DIGITAL HOME FOR APSS</div>
+          <h1>One community.<br><span>Limitless possibilities.</span></h1>
+          <p>A unified experience connecting professional speakers to their community, learning, events, and opportunities — all powered by one member record.</p>
+          <div class="apss-actions"><a class="apss-primary" href="#apss-features">Explore the experience <span>↗</span></a><a class="apss-secondary" href="#apss-journey">See the member journey →</a></div>
+          <div class="apss-hero-note">Prototype only · No real membership data · No live transactions</div>
+        </div>
+        <div class="apss-hero-panel" aria-label="Illustrative member dashboard">
+          <div class="apss-windowbar"><span>APSS ONE / MEMBER OVERVIEW</span><span>● ● ●</span></div>
+          <div class="apss-avatarline"><div class="apss-avatar">AS</div><div><b>Welcome back, Alex</b><small>Professional member · Illustrative profile</small></div><span class="apss-active">Active (demo)</span></div>
+          <div class="apss-mini-grid"><div><small>Journey stage</small><b>Build</b><span>Business & visibility</span></div><div><small>Core modules</small><b>3 / 4</b><span>Illustrative progress</span></div></div>
+          <div class="apss-progress-title"><span>Professional development</span><b>75%</b></div><div class="apss-progress"><i></i></div>
+          <div class="apss-upcoming"><span class="apss-date"><b>24</b><small>NOV</small></span><div><b>Monthly Member Meeting</b><small>Event example · Registration coming soon</small></div><span>↗</span></div>
+          <div class="apss-panel-foot">This panel uses fictional data and demonstrates the planned experience.</div>
+        </div>
+      </section>
+      <section class="apss-value"><div><b>One member record</b><span>Across programmes and activities</span></div><div><b>One login</b><span>For members and volunteers</span></div><div><b>One connected experience</b><span>From discovery to legacy</span></div></section>
+      <section id="apss-journey" class="apss-section apss-journey">
+        <div class="apss-section-heading"><div><div class="apss-kicker dark">BUILT AROUND EVERY SPEAKER</div><h2>Every milestone, connected.</h2></div><p>Track the seven stages of the APSS membership and speaker growth journey — from your first connection to a lasting legacy.</p></div>
+        <div class="apss-steps"><?php foreach (['Discover','Join','Belong','Develop','Build','Lead','Legacy'] as $i=>$step): ?><div class="apss-step"><span><?php echo esc_html(sprintf('%02d',$i+1)); ?></span><b><?php echo esc_html($step); ?></b></div><?php endforeach; ?></div>
+        <div class="apss-disclaimer">Journey tracking and eligibility automation are planned features, not implemented in this prototype.</div>
+      </section>
+      <section id="apss-features" class="apss-section apss-features">
+        <div class="apss-section-heading"><div><div class="apss-kicker dark">THE COMPLETE PLATFORM VISION</div><h2>Everything APSS needs.<br><span>Beautifully connected.</span></h2></div><p>Explore each module to understand its proposed member experience and workflow. Select any card to expand the feature concept.</p></div>
+        <div class="apss-legend"><span class="apss-tag">Coming soon</span> Indicates planned functionality, not active services</div>
+        <?php foreach ($groups as $group=>$modules): ?>
+          <div class="apss-group" <?php if ($group==='AI & Insights') echo 'id="apss-ai"'; ?>><h3><?php echo esc_html($group); ?></h3><div class="apss-grid">
+            <?php foreach ($modules as $i=>$m): ?>
+            <details class="apss-tile"><summary><span class="apss-icon" aria-hidden="true"><?php echo esc_html(['Members'=>'◎','Engagement'=>'◇','Learning'=>'✦','Operations'=>'▤','AI & Insights'=>'✳'][$group]); ?></span><span class="apss-tag">Coming soon</span><h4><?php echo esc_html($m[0]); ?></h4><p><?php echo esc_html($m[2]); ?></p><span class="apss-open">Explore concept <span>↗</span></span></summary><div class="apss-tile-details"><b>How it will work</b><p><?php echo esc_html($m[3]); ?></p><small>Proposed implementation: <?php echo esc_html($m[4]); ?>. This is a planned capability, not an operational feature.</small></div></details>
+            <?php endforeach; ?>
+          </div></div>
         <?php endforeach; ?>
-      </div></section>
-      <footer class="apss-footer">Technology direction: WordPress + CiviCRM + custom APSS modules. <strong>CiviCRM integration and AI workflows are not installed by this plugin.</strong></footer>
+      </section>
+      <section class="apss-ai-banner"><div><div class="apss-kicker">OPTIONAL PHASE 2 · GROQ API</div><h2>Intelligence that helps people connect.</h2><p>Future AI-powered speaker discovery, membership guidance, and staff-assisted reporting — with strict permissions, approved data and human oversight.</p><span>API service is not connected in this demo.</span></div><div class="apss-ai-mark" aria-hidden="true">✳</div></section>
+      <footer class="apss-footer"><div><b>APSS <em>One</em></b><p>A concept proposal by Axon 1Pro Solutions</p></div><div>Built on a proposed WordPress + CiviCRM foundation.<br>All showcased content is illustrative. Features marked Coming Soon are not implemented.</div></footer>
     </div>
     <?php return ob_get_clean();
 });
