@@ -2,12 +2,12 @@
 /**
  * Plugin Name: APSS One Demo Interface
  * Description: APSS One presentation portal. All example data is synthetic; live CiviCRM integration is a future phase.
- * Version: 0.4.0
+ * Version: 0.5.0
  * Requires PHP: 8.1
  */
 if (!defined('ABSPATH')) exit;
 add_action('wp_enqueue_scripts', function () {
-    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.4.0');
+    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.5.0');
 });
 add_shortcode('apss_one_demo', function () {
     wp_enqueue_style('apss-one-demo');
@@ -80,6 +80,15 @@ add_shortcode('apss_one_demo', function () {
             <?php endforeach; ?>
           </div></div>
         <?php endforeach; ?>
+      </section>
+      <section id="apss-membership-demo" class="apss-section apss-membership-showcase">
+        <div class="apss-section-heading"><div><div class="apss-kicker dark">LIVE FOUNDATION · PHASE 2</div><h2>Membership engine, now in place.</h2></div><p>CiviCRM 6.19.1 is installed, with a separate APSS database and SGD configured. The two membership plans below are ready for setup and testing.</p></div>
+        <div class="apss-membership-plans">
+          <article><div class="apss-plan-tag">ASSOCIATE MEMBER · AM</div><h3>S$350 <small>/ year</small></h3><p>For emerging speakers building their skills, network and professional journey.</p><div class="apss-plan-status">Membership type setup in progress</div></article>
+          <article><div class="apss-plan-tag">PROFESSIONAL MEMBER · PM</div><h3>S$390 <small>/ year</small></h3><p>For established professional speakers, with public speaker-directory eligibility subject to active status.</p><div class="apss-plan-status">Membership type setup in progress</div></article>
+          <article><div class="apss-plan-tag">CSP RECOGNITION</div><h3>Credential <small>status</small></h3><p>Professional designation verification and continuing membership eligibility, with APSS/GSF rules.</p><div class="apss-plan-status">Custom verification · Coming Soon</div></article>
+        </div>
+        <div class="apss-quote-disclaimer"><strong>Platform status:</strong> WordPress and CiviCRM are operational foundations. This section is a quotation walkthrough, not a live checkout, membership application, or customer portal. No actual member transactions are being accepted.</div>
       </section>
       <section id="apss-architecture" class="apss-section apss-architecture">
         <div class="apss-section-heading"><div><div class="apss-kicker dark">PROPOSED OPEN-SOURCE FOUNDATION</div><h2>One platform. Built for APSS.</h2></div><p>This quotation reference presents a single branded experience delivered with WordPress, CiviCRM and APSS-specific extensions.</p></div>
