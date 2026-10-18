@@ -2,12 +2,12 @@
 /**
  * Plugin Name: APSS One Demo Interface
  * Description: APSS One presentation portal. All example data is synthetic; live CiviCRM integration is a future phase.
- * Version: 0.3.0
+ * Version: 0.4.0
  * Requires PHP: 8.1
  */
 if (!defined('ABSPATH')) exit;
 add_action('wp_enqueue_scripts', function () {
-    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.3.0');
+    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.4.0');
 });
 add_shortcode('apss_one_demo', function () {
     wp_enqueue_style('apss-one-demo');
@@ -30,7 +30,7 @@ add_shortcode('apss_one_demo', function () {
       ],
       'Operations' => [
         ['Communications','mail','Member segments, newsletters, event notices, consent and scheduled reminders.','Choose segment → approve → send → report','CiviMail integration'],
-        ['Finance & Xero','wallet','Membership fees, tickets, refunds, invoice records and exports.','Approved charge → payment → receipt → reconciliation','CiviCRM + integration'],
+        ['Finance & Xero Cloud','wallet','Membership fees, event payments, invoices, receipts, refunds and automated reconciliation with Xero Cloud.','CiviCRM records payment → authorised connector syncs invoice/payment/refund to Xero → reconciliation and exception monitoring','CiviCRM + custom Xero Cloud API connector'],
         ['ExCo Administration','shield','Portfolio roles, approvals, committee handovers, audit trails and reports.','Task assigned → approval → audit → handover','Custom module'],
       ],
       'AI & Insights' => [
@@ -80,6 +80,40 @@ add_shortcode('apss_one_demo', function () {
             <?php endforeach; ?>
           </div></div>
         <?php endforeach; ?>
+      </section>
+      <section id="apss-architecture" class="apss-section apss-architecture">
+        <div class="apss-section-heading"><div><div class="apss-kicker dark">PROPOSED OPEN-SOURCE FOUNDATION</div><h2>One platform. Built for APSS.</h2></div><p>This quotation reference presents a single branded experience delivered with WordPress, CiviCRM and APSS-specific extensions.</p></div>
+        <div class="apss-tech-grid">
+          <article><span>FOUNDATION 01</span><h3>WordPress</h3><p>Public website, searchable speaker pages, visual editing, user experience and customised member dashboards.</p><a href="https://wordpress.org/" target="_blank" rel="noopener noreferrer">WordPress project ↗</a></article>
+          <article><span>FOUNDATION 02</span><h3>CiviCRM</h3><p>Central contact and member records, membership levels and renewals, contributions, standard events, email segments and reports. Custom extensions connect the specialist APSS workflows to its records.</p><a href="https://civicrm.org/" target="_blank" rel="noopener noreferrer">Explore CiviCRM ↗</a></article>
+          <article><span>ACCOUNTING INTEGRATION</span><h3>Xero Cloud</h3><p>Xero stays APSS’s accounting system. A proposed secure sync sends approved invoices, payments, refunds and contact references from APSS One to Xero, with mapping, reconciliation, retry logs and duplicate controls.</p><a href="https://www.xero.com/sg/" target="_blank" rel="noopener noreferrer">Xero Cloud ↗</a></article>
+        </div>
+        <div class="apss-architecture-note"><strong>Integration boundaries:</strong> WordPress and CiviCRM are the proposed foundation, not yet a live CiviCRM connection in this demo. Xero Cloud sync is proposed custom development and requires an authorised APSS Xero connection, validation of accounting rules and API testing.</div>
+      </section>
+      <section class="apss-section apss-rfp-overview">
+        <div class="apss-section-heading"><div><div class="apss-kicker dark">RFP / DELIVERABLE EXPLANATION</div><h2>What we will develop.</h2></div><p>Each module below will be built on the shared membership foundation. The cards above describe the individual workflow; this table shows the development approach for APSS decision-makers.</p></div>
+        <div class="apss-table-scroll"><table class="apss-rfp-table"><thead><tr><th>Requested module</th><th>Foundation and custom scope</th><th>Proposal status</th></tr></thead><tbody>
+        <?php
+          $plans = [
+            ['Membership services & journeys','CiviCRM membership, custom approval flow, seven-stage tracking, configurable AM/PM/CSP pathways and renewal automation.'],
+            ['Speaker directory','WordPress public profile pages, CiviCRM membership eligibility checks, expertise filters, enquiry routing and member self-editing.'],
+            ['Community and SIGs','Custom protected groups, discussions, notifications, moderation, member permissions and resource sharing.'],
+            ['Events','CiviEvent-based event records plus custom ticket rules, check-in, attendance, organisers and specialised formats.'],
+            ['Convention','Custom passes, multi-day sessions, ticketing, sponsor views and exports linked to CiviCRM contact records.'],
+            ['Professional development','Custom course catalogue, protected learning resources, assessments, 4 Core Modules, 26 electives, CPD and mentoring rules.'],
+            ['Communications','CiviMail and consent segmentation plus APSS-specific templates, automations, deliverability provider and scheduling.'],
+            ['Finance & Xero Cloud','CiviCRM payments/invoices and a custom approved sync to Xero for invoices, payment status, refunds, reconciliation and exceptions.'],
+            ['Public website','WordPress page templates, content management, SEO, responsive layouts and member-directory integration.'],
+            ['ExCo & administration','Role-based approvals, delegated portfolio access, tasks, audit events, committee handovers and data safeguards.'],
+            ['Reports & analytics','Unified member, renewals, events, learning and financial reporting; CSV/Excel exports and ExCo-only metrics.'],
+            ['Migration, integration & security','Data matching from existing tools, staging, backups, PDPA procedures, single login and handover documentation.']
+          ];
+          foreach ($plans as $plan) {
+            echo '<tr><th scope="row">'.esc_html($plan[0]).'</th><td>'.esc_html($plan[1]).'</td><td><span class="apss-tag">Coming soon</span></td></tr>';
+          }
+        ?>
+        </tbody></table></div>
+        <p class="apss-disclaimer">This is a proposal-reference explanation, not a completed compliance matrix or a fixed-price offer. Final requirement commitments are documented separately against the APSS RFP.</p>
       </section>
       <section id="apss-delivery" class="apss-section apss-quotation-guide">
         <div class="apss-section-heading"><div><div class="apss-kicker dark">PROPOSAL WALKTHROUGH</div><h2>From concept to delivery.</h2></div><p>Use this view alongside the formal quotation to distinguish the current demonstrator from the planned production system.</p></div>
