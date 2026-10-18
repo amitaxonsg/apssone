@@ -2,12 +2,12 @@
 /**
  * Plugin Name: APSS One Demo Interface
  * Description: APSS One presentation portal. All example data is synthetic; live CiviCRM integration is a future phase.
- * Version: 0.2.0
+ * Version: 0.2.1
  * Requires PHP: 8.1
  */
 if (!defined('ABSPATH')) exit;
 add_action('wp_enqueue_scripts', function () {
-    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.2.0');
+    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.2.1');
 });
 add_shortcode('apss_one_demo', function () {
     wp_enqueue_style('apss-one-demo');
@@ -86,3 +86,15 @@ add_shortcode('apss_one_demo', function () {
     </div>
     <?php return ob_get_clean();
 });
+
+
+// Apply presentation-only template to the dedicated APSS One page.
+// Other WordPress pages, the dashboard and CiviCRM screens are untouched.
+add_filter('template_include', function ($template) {
+    if (is_admin() || !is_singular('page')) return $template;
+    $page = get_queried_object();
+    if (!$page || $page->post_name !== 'apss-one') return $template;
+    if (!has_shortcode((string) $page->post_content, 'apss_one_demo')) return $template;
+    $custom = plugin_dir_path(__FILE__) . 'templates/fullwidth.php';
+    return is_readable($custom) ? $custom : $template;
+}, 99);
