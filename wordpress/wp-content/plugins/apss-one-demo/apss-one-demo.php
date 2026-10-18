@@ -2,12 +2,12 @@
 /**
  * Plugin Name: APSS One Demo Interface
  * Description: APSS One presentation portal. All example data is synthetic; live CiviCRM integration is a future phase.
- * Version: 0.6.0
+ * Version: 0.7.0
  * Requires PHP: 8.1
  */
 if (!defined('ABSPATH')) exit;
 add_action('wp_enqueue_scripts', function () {
-    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.6.0');
+    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.7.0');
 });
 add_shortcode('apss_one_demo', function () {
     wp_enqueue_style('apss-one-demo');
@@ -80,6 +80,34 @@ add_shortcode('apss_one_demo', function () {
             <?php endforeach; ?>
           </div></div>
         <?php endforeach; ?>
+      </section>
+      <section id="apss-live-members" class="apss-section apss-live-members">
+        <div class="apss-section-heading"><div><div class="apss-kicker dark">CIVICRM LIVE DEMONSTRATION</div><h2>One membership database.<br><span>Four example journeys.</span></h2></div><p>These are synthetic demonstration records only. Their current membership status is read from CiviCRM, not maintained in a separate WordPress list.</p></div>
+        <div class="apss-live-grid">
+        <?php
+        $examples = [3 => ['Alex Tan','Professional'], 4=>['Sarah Lim','Associate'], 5=>['Daniel Wong','Professional'], 6=>['Priya Nair','Associate']];
+        $membership_data=[];
+        try {
+          if (class_exists('\\Civi\\Api4\\Membership')) {
+            $records=\\Civi\\Api4\\Membership::get(FALSE)->addWhere('contact_id','IN',array_keys($examples))->execute();
+            foreach ($records as $record) {
+              $id=(int)($record['contact_id']??0);
+              $membership_data[$id]=$record;
+            }
+          }
+        } catch (\\Throwable $error) {
+          // Leave cards as unavailable rather than showing stale or invented status.
+          error_log('APSS One: CiviCRM membership preview unavailable');
+        }
+        $statuses=[2=>'Current',4=>'Expired',5=>'Pending'];
+        foreach ($examples as $id=>$meta):
+          $record=$membership_data[$id]??null;
+          $status=$record ? ($statuses[(int)$record['status_id']]??'Other') : 'Awaiting demo data';
+        ?>
+          <article class="apss-live-card"><span class="apss-live-label">SYNTHETIC RECORD</span><h3><?php echo esc_html($meta[0]); ?></h3><p><?php echo esc_html($meta[1]); ?> Member</p><span class="apss-live-status"><?php echo esc_html($status); ?></span><small>CiviCRM contact <?php echo (int)$id; ?> · illustrative data</small></article>
+        <?php endforeach; ?>
+        </div>
+        <p class="apss-disclaimer">No applications, invoices, member profile editing or emails are enabled in this preview. Speaker-directory references below are separate from these synthetic records. Actual APSS members will not be migrated without permission.</p>
       </section>
       <section id="apss-directory" class="apss-section apss-speaker-showcase">
         <div class="apss-section-heading"><div><div class="apss-kicker dark">EXISTING APSS CONTENT · DIRECTORY REFERENCE</div><h2>Professional speakers,<br><span>one searchable network.</span></h2></div><p>The current APSS directory already contains public member profiles. These examples show what APSS One can retain and improve, with member-controlled updates and automatic eligibility once connected to CiviCRM.</p></div>
