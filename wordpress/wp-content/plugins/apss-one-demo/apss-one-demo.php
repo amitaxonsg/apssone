@@ -2,12 +2,12 @@
 /**
  * Plugin Name: APSS One Demo Interface
  * Description: APSS One presentation portal. All example data is synthetic; live CiviCRM integration is a future phase.
- * Version: 0.2.1
+ * Version: 0.3.0
  * Requires PHP: 8.1
  */
 if (!defined('ABSPATH')) exit;
 add_action('wp_enqueue_scripts', function () {
-    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.2.1');
+    wp_register_style('apss-one-demo', plugins_url('assets/demo.css', __FILE__), [], '0.3.0');
 });
 add_shortcode('apss_one_demo', function () {
     wp_enqueue_style('apss-one-demo');
@@ -80,6 +80,16 @@ add_shortcode('apss_one_demo', function () {
             <?php endforeach; ?>
           </div></div>
         <?php endforeach; ?>
+      </section>
+      <section id="apss-delivery" class="apss-section apss-quotation-guide">
+        <div class="apss-section-heading"><div><div class="apss-kicker dark">PROPOSAL WALKTHROUGH</div><h2>From concept to delivery.</h2></div><p>Use this view alongside the formal quotation to distinguish the current demonstrator from the planned production system.</p></div>
+        <div class="apss-quotation-grid">
+          <div class="apss-quote-card"><span class="apss-quote-num">01 / FOUNDATION</span><h3>Unified membership</h3><p>WordPress serves the branded experience. CiviCRM is proposed for a single member record, memberships, renewals, contacts, payments and standard events.</p><b>Next development milestone</b><small>CiviCRM installation, member roles, synthetic records and basic status-based workflows.</small></div>
+          <div class="apss-quote-card"><span class="apss-quote-num">02 / SPECIALIST MODULES</span><h3>Built around APSS</h3><p>Custom speaker-directory eligibility, community spaces, learning, assessments, CPD, mentoring, competitions and ExCo workflows.</p><b>Planned / Coming Soon</b><small>Detailed scope and acceptance criteria to be confirmed against the 221-item RFP compliance matrix.</small></div>
+          <div class="apss-quote-card"><span class="apss-quote-num">03 / CONNECTED SERVICES</span><h3>APSS-operated ecosystem</h3><p>Planned integrations with Xero, Zoom, Google Workspace and payment/email providers, with ownership and access controlled by APSS.</p><b>Planned / Coming Soon</b><small>Integrations, migration and operating costs must appear separately in the formal quotation.</small></div>
+          <div class="apss-quote-card"><span class="apss-quote-num">04 / OPTIONAL INTELLIGENCE</span><h3>AI with oversight</h3><p>Optional Groq-backed speaker matching, FAQs and administrative drafting using only approved data and permission-limited application tools.</p><b>Phase 2 concept</b><small>No live AI calls, payment changes or member-data access are enabled in this demo.</small></div>
+        </div>
+        <div class="apss-quote-disclaimer"><strong>Quotation note:</strong> This demonstration explains proposed workflows; it is not proof that a requirement has been delivered. The signed RFP response, fixed-price schedule, architecture, testing criteria and implementation plan remain the authoritative scope.</div>
       </section>
       <section class="apss-ai-banner"><div><div class="apss-kicker">OPTIONAL PHASE 2 · GROQ API</div><h2>Intelligence that helps people connect.</h2><p>Future AI-powered speaker discovery, membership guidance, and staff-assisted reporting — with strict permissions, approved data and human oversight.</p><span>API service is not connected in this demo.</span></div><div class="apss-ai-mark" aria-hidden="true">✳</div></section>
       <footer class="apss-footer"><div><b>APSS <em>One</em></b><p>A concept proposal by Axon 1Pro Solutions</p></div><div>Built on a proposed WordPress + CiviCRM foundation.<br>All showcased content is illustrative. Features marked Coming Soon are not implemented.</div></footer>
