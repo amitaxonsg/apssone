@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+wp-config.php
+wp-content/uploads/
+wordpress/wp-content/uploads/
+node_modules/
+vendor/
+*.sql
+*.sql.gz
+*.bak
+.DS_Store
