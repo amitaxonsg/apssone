@@ -54,3 +54,37 @@ body.apss-demo-template{margin:0;background:#fff}body.apss-demo-template #main-c
 @media(max-width:850px){.rfq-appendix-list{grid-template-columns:1fr}.rfq-appendix{padding:23px}}
 
 .rfq-plain-list{padding-left:23px;margin:12px 0 22px}.rfq-plain-list li{font-size:17px;line-height:1.75;color:#455f66;margin-bottom:12px}.rfq-rfp-ref{font-size:13px!important;color:#627f85;border-top:1px solid #d8e6e1;padding-top:12px}.rfq-gap-audit{margin-top:26px;background:#f0f6f4;border-left:4px solid #c0994f;padding:20px 24px;border-radius:8px}.rfq-gap-audit h3{font-size:21px;margin:0 0 8px}.rfq-gap-audit p{font-size:16px;line-height:1.8;margin:0;color:#4c6b72}
+
+/* APSS One — responsive custom-built solution infographic */
+.rfq-visual-plan{background:#f1f8f6}.rfq-diagram{border:1px solid #cbded8;background:white;border-radius:22px;padding:30px;box-shadow:0 15px 45px #09353c0b}
+.rfq-diagram-center{text-align:center;background:linear-gradient(120deg,#0a4047,#117f78);border-radius:15px;padding:27px;color:white;margin:0 auto 22px;max-width:720px}
+.rfq-diagram-center span{display:block;color:#b8e7d9;letter-spacing:.13em;font-size:13px;font-weight:800}
+.rfq-diagram-center strong{display:block;font-size:29px;margin:5px 0}
+.rfq-diagram-center small{font-size:16px;color:#e1f4f0}
+.rfq-diagram-items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.rfq-diagram-items>div{background:#f3f9f7;border:1px solid #d8eae4;border-radius:13px;padding:19px;display:flex;flex-direction:column;gap:4px}
+.rfq-diagram-items b{color:#13867d;font-size:13px}
+.rfq-diagram-items strong{font-size:19px;color:#123d45}
+.rfq-diagram-items small{font-size:15px;color:#56767a}
+.rfq-diagram-base{display:flex;justify-content:space-around;gap:20px;flex-wrap:wrap;margin-top:20px;border-top:1px solid #d8e7e3;padding-top:20px;color:#0e6964;font-size:16px;font-weight:800}
+.rfq-agent{background:#f7fbfa}
+.rfq-agent-hero{display:flex;align-items:center;gap:20px;border-radius:17px;background:#0a4147;color:white;padding:25px 30px;margin-bottom:22px}
+.rfq-agent-avatar{width:76px;height:76px;flex:0 0 76px;display:grid;place-items:center;border-radius:19px;background:#dbf1e8;color:#0d6563;font-size:37px;font-weight:800}
+.rfq-agent-hero>div:nth-child(2){flex:1}.rfq-agent-hero strong{display:block;font-size:27px}
+.rfq-agent-hero span:not(.rfq-coming){font-size:14px;color:#b6d9d4}.rfq-agent-hero p{font-size:18px;margin:8px 0 0}
+.rfq-agent-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.rfq-agent-grid article{background:white;padding:27px;border:1px solid #d8e9e3;border-radius:13px}
+.rfq-agent-grid h3{font-size:24px;color:#0d5959;margin-bottom:12px}.rfq-agent-grid ul{margin:0;padding-left:22px}
+.rfq-agent-grid li{font-size:17px;line-height:1.7;margin-bottom:9px;color:#506d71}
+.rfq-agent-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:23px 0}
+.rfq-agent-flow>div{background:#e6f3ed;border-radius:12px;padding:18px}
+.rfq-agent-flow span{display:inline-grid;place-items:center;background:#147a72;color:#fff;width:30px;height:30px;border-radius:50%;font-weight:800}
+.rfq-agent-flow b{display:block;margin:10px 0 2px;font-size:17px}
+.rfq-agent-flow small{display:block;font-size:14px;color:#5a7478}
+.rfq-ai-economics{display:grid;grid-template-columns:1.5fr 1fr;gap:35px;margin:0 0 28px;padding:30px;background:#fff;border-radius:15px;border:1px solid #d0e2de}
+.rfq-ai-economics h3{font-size:31px;line-height:1.25;margin:12px 0;color:#103e47}
+.rfq-ai-economics p{color:#536e73;font-size:18px;line-height:1.75}
+.rfq-economics-steps{display:grid;gap:11px}.rfq-economics-steps>div{padding:18px;border-radius:10px;background:#eef6f3}
+.rfq-economics-steps b{display:block;color:#0b7770;font-size:19px}.rfq-economics-steps span{font-size:15px;color:#587276}
+@media(max-width:900px){.rfq-diagram-items{grid-template-columns:repeat(2,1fr)}.rfq-agent-flow{grid-template-columns:repeat(2,1fr)}.rfq-ai-economics{grid-template-columns:1fr}}
+@media(max-width:650px){.rfq-diagram{padding:18px}.rfq-diagram-items,.rfq-agent-grid,.rfq-agent-flow{grid-template-columns:1fr}.rfq-agent-hero{padding:20px;flex-wrap:wrap}.rfq-agent-hero .rfq-coming{float:none}.rfq-ai-economics{padding:21px}.rfq-diagram-center strong{font-size:24px}}
