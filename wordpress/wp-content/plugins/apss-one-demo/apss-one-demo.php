@@ -2,12 +2,12 @@
 /**
  * Plugin Name: APSS One RFQ Proposal
  * Description: Private APSS One digital transformation RFQ and quotation reference.
- * Version: 1.2.0
+ * Version: 1.3.0
  * Requires PHP: 8.1
  */
 if (!defined('ABSPATH')) exit;
 add_action('wp_enqueue_scripts', function () {
-  wp_register_style('apss-one-proposal', plugins_url('assets/demo.css', __FILE__), [], '1.2.0');
+  wp_register_style('apss-one-proposal', plugins_url('assets/demo.css', __FILE__), [], '1.3.0');
 });
 add_shortcode('apss_one_demo', function () {
   wp_enqueue_style('apss-one-proposal');
@@ -50,6 +50,21 @@ add_shortcode('apss_one_demo', function () {
       <div class="rfq-pillars"><article><strong>Membership Services</strong><p>Member lifecycle, onboarding, renewals, professional levels and growth tracking.</p></article><article><strong>Professional Development</strong><p>Core Modules, electives, assessments, CPD, mentoring and certification progression.</p></article><article><strong>Events & Community</strong><p>Meetings, SIGs, groups, ticketing, Convention and participation evidence.</p></article></div>
       <div class="rfq-note">The complete RFP response, Appendix A pricing schedule and acceptance criteria will determine final commitments; this site summarises our direction.</div>
     </section>
+    <section class="rfq-section rfq-visual-plan" id="solution-infographic">
+      <div class="rfq-head"><span class="rfq-eyebrow">OUR SOLUTION AT A GLANCE</span><h2>One connected APSS ecosystem.</h2><p>Instead of six disconnected tools, we propose one APSS-owned platform that connects people, learning, events, communications and finances through a single trusted member record.</p></div>
+      <div class="rfq-diagram" role="img" aria-label="One APSS member record links Membership, Speaker Directory, Learning and CPD, Events and Community, Administration and Reporting, with controlled integrations and an optional AI assistant.">
+        <div class="rfq-diagram-center"><span>APSS ONE</span><strong>One secure member record</strong><small>Single login · Member portal · ExCo administration</small></div>
+        <div class="rfq-diagram-items">
+        <div><b>01</b><strong>Membership</strong><small>Join · Approve · Renew</small></div>
+        <div><b>02</b><strong>Speaker Directory</strong><small>Profiles · Leads · Visibility</small></div>
+        <div><b>03</b><strong>Learning & CPD</strong><small>Courses · Evidence · Mentoring</small></div>
+        <div><b>04</b><strong>Events & Community</strong><small>Tickets · Check-in · SIGs</small></div>
+        <div><b>05</b><strong>ExCo Operations</strong><small>Approvals · Governance · Reports</small></div>
+        <div><b>06</b><strong>Connected Services</strong><small>Xero · Zoom · Google · Payments</small></div>
+        </div>
+        <div class="rfq-diagram-base"><span>APSS-owned dedicated VPS & secure data</span><span>Optional AI Agent · Permission-controlled automation</span></div>
+      </div>
+    </section>
     <section class="rfq-section" id="solutions">
       <div class="rfq-head"><span class="rfq-eyebrow">03 / OUR PROPOSED SOLUTIONS</span><h2>Designed module by module.</h2><p>Every card connects an APSS requirement to a proposed implementation and an optional AI enhancement. Expand each module for the intended workflow. All production modules are <strong>Coming Soon</strong> and subject to approved project scope.</p></div>
       <div class="rfq-module-grid">
@@ -62,6 +77,18 @@ add_shortcode('apss_one_demo', function () {
       <div class="rfq-head"><span class="rfq-eyebrow">04 / AI & AUTOMATION</span><h2>AI as an assistant, not a replacement for oversight.</h2><p>Using a cost-controlled language-model API such as Groq, we can propose speaker discovery, membership guidance, document search, communications drafting and authorised administration reports.</p></div>
       <div class="rfq-pillars"><article><strong>Speaker Match</strong><p>Find speakers from approved public directory attributes and explain their relevance.</p></article><article><strong>Member Concierge</strong><p>Guide onboarding, renewals, programme discovery and commonly asked questions.</p></article><article><strong>ExCo Copilot</strong><p>Draft reports, meeting summaries and action lists from permitted information.</p></article></div>
       <div class="rfq-note">Optional Phase 2. No Groq API connection, autonomous sending or access to actual APSS member records is enabled on this reference website. Permission boundaries and PDPA review are mandatory.</div>
+    </section>
+    <section class="rfq-section rfq-agent" id="mary">
+      <div class="rfq-head"><span class="rfq-eyebrow">AI-POWERED OPERATIONS · OPTIONAL ENHANCEMENT</span><h2>Meet Mary — your future APSS AI Agent.</h2><p>Imagine a virtual APSS assistant available around the clock. Members could ask Mary about courses, events and their own membership. Authorised staff could ask her to prepare reports, draft messages and coordinate routine follow-ups using connected APSS records.</p></div>
+      <div class="rfq-agent-hero"><div class="rfq-agent-avatar" aria-hidden="true">M</div><div><strong>Mary</strong><span>APSS AI Agent · Proposed concept</span><p>“How may I help you with APSS today?”</p></div><span class="rfq-coming">Optional Phase 2</span></div>
+      <div class="rfq-agent-grid">
+        <article><h3>For members</h3><ul><li>Explain membership benefits, renewal dates and application steps.</li><li>Find upcoming events and appropriate PD classes.</li><li>Summarise a member's own learning progress after secure login.</li><li>Suggest relevant mentors, groups or opportunities based on approved information.</li></ul></article>
+        <article><h3>For event organisers</h3><ul><li>Draft event descriptions, announcements and reminder emails.</li><li>Prepare registration lists and authorised attendance summaries.</li><li>Flag tasks that require a human organiser's attention.</li><li>Summarise feedback and draft follow-up communications.</li></ul></article>
+        <article><h3>For APSS administration</h3><ul><li>Answer authorised questions such as “Which memberships expire next month?”</li><li>Find approved documents, policies and committee information.</li><li>Prepare renewal reminders, emails and newsletters for approval.</li><li>Draft monthly membership, events and finance reports with source references.</li></ul></article>
+        <article><h3>For speaker enquiries</h3><ul><li>Understand a buyer's event topic, audience and preferred language.</li><li>Suggest relevant speakers using approved public profiles.</li><li>Explain the match and help route the enquiry.</li><li>Draft polite follow-ups without exposing private member information.</li></ul></article>
+      </div>
+      <div class="rfq-agent-flow"><div><span>1</span><b>Ask Mary</b><small>Natural-language question</small></div><div><span>2</span><b>Check permissions</b><small>Access approved APSS data</small></div><div><span>3</span><b>Prepare action</b><small>Answer, draft or report</small></div><div><span>4</span><b>Human approval</b><small>Send or change records only when authorised</small></div></div>
+      <p class="rfq-note"><strong>Important:</strong> Mary is a proposal concept, not a deployed agent. Email sending, payment changes, membership approvals and access to private data require authenticated permissions, logs and appropriate staff approval. Groq and OpenAI API fees, infrastructure and integration costs will be listed separately.</p>
     </section>
     <section class="rfq-section alt" id="integrations">
       <div class="rfq-head"><span class="rfq-eyebrow">05 / CONNECTED SYSTEMS</span><h2>Keep the tools APSS needs. Connect the information.</h2><p>APSS intends to retain Xero, Google Workspace and Zoom. Our proposal connects them securely to the member and operational records, rather than requiring another disconnected process.</p></div>
@@ -95,6 +122,7 @@ add_shortcode('apss_one_demo', function () {
     </section>
     <section class="rfq-section rfq-quote" id="quotation">
       <div class="rfq-head"><span class="rfq-eyebrow">06 / IMPLEMENTATION & QUOTATION</span><h2>A transparent, phased investment.</h2><p>The formal commercial submission will set out discovery, design, development, migration, security, testing, support, recurring services and optional AI enhancements, including a three-year total cost.</p></div>
+      <div class="rfq-ai-economics"><div><span class="rfq-eyebrow">WHY DEVELOPMENT IS CHANGING</span><h3>AI changes how software is built — and what becomes affordable.</h3><p>In the past, developing custom membership workflows, integrations and automation required extensive manual coding, repetitive testing and maintenance. AI-assisted engineering now helps our team produce prototypes, build routine components, document workflows and test changes more efficiently.</p><p>That creates an opportunity for APSS to consider a more ambitious, purpose-built platform with a leaner development process. <strong>However, AI does not eliminate the work required for architecture, security, data migration, quality assurance or ongoing support.</strong> We will provide transparent fixed development prices and separate running costs so APSS can evaluate the actual savings.</p></div><div class="rfq-economics-steps"><div><b>Before</b><span>Manual repetitive development and disconnected workflows</span></div><div><b>Now</b><span>AI-assisted engineering, faster iterations and reusable components</span></div><div><b>For APSS</b><span>Custom automation with controlled delivery and operating costs</span></div></div></div>
       <div class="rfq-quote-actions"><div><b>View / Download Quote</b><p>Quotation PDF and complete Appendix A will be linked here after the approved document is uploaded.</p></div><span class="rfq-unavailable">Document pending · Not available yet</span></div>
       <div class="rfq-stage-grid"><div><strong>Discover & design</strong><p>Requirements mapping, workflows, data and architecture.</p></div><div><strong>Develop & integrate</strong><p>Priority modules and approved systems integrations.</p></div><div><strong>Test & migrate</strong><p>UAT, reconciliation, training and operational handover.</p></div><div><strong>Support & evolve</strong><p>Warranty, ongoing maintenance and optional AI roadmap.</p></div></div>
     </section>
