@@ -2,12 +2,12 @@
 /**
  * Plugin Name: APSS One RFQ Proposal
  * Description: Private APSS One digital transformation RFQ and quotation reference.
- * Version: 1.6.1
+ * Version: 1.6.2
  * Requires PHP: 8.1
  */
 if (!defined('ABSPATH')) exit;
 add_action('wp_enqueue_scripts', function () {
-  wp_register_style('apss-one-proposal', plugins_url('assets/demo.css', __FILE__), [], '1.6.1');
+  wp_register_style('apss-one-proposal', plugins_url('assets/demo.css', __FILE__), [], '1.6.2');
 });
 add_shortcode('apss_one_demo', function () {
   wp_enqueue_style('apss-one-proposal');
@@ -20,7 +20,7 @@ add_shortcode('apss_one_demo', function () {
     ['Professional Development','Four assessed Core Modules, 26 electives, materials, rubrics, resits and progress.','Custom learning catalogue, assessment workflow, content access, recorded evidence and progress tracking.','Relevant learning recommendations'],
     ['CPD, CSP & Mentoring','Points, certificates, eligibility, mentor allocation, meetings and learning reports.','CPD ledger, reviewer permissions, qualification criteria, mentor cycles and certificates.','Mentoring and progression suggestions'],
     ['Communications','Segmented newsletters, consent, automated notifications and templates.','Central communication preferences, reusable messages, campaign workflows and deliverability integration.','AI-assisted drafts with human approval'],
-    ['Payments & Xero Cloud','Invoices, membership and event fees, refunds, reconciliation and financial exports.','Unified transactional records and proposed secure Xero Cloud sync with mapping and audit logs.','Exception detection and finance summaries'],
+    ['Online Payments & Xero Cloud','Membership renewals, event bookings, PD course enrolments, Convention tickets, receipts, refunds and financial reconciliation.','Custom unified checkout using Stripe for cards and eligible Singapore PayNow payments; optional PayPal for international buyers. Payment statuses, receipts and approved finance records will synchronise with Xero Cloud through a monitored connector. APSS maintains its own gateway accounts.','AI can help flag reconciliation exceptions and draft finance summaries, but cannot autonomously approve refunds or accounting entries.'],
     ['Public Website','APSS-branded content, articles, SEO, programme pages and speaker listings.','WordPress content management with modern layouts and integration to future application services.','Editorial drafts and content discovery'],
     ['ExCo & Governance','Committee permissions, nominations, handovers, approvals, task history and secure documents.','Role-aware workflow console, approval queues and governance repository links.','Summaries and action tracking'],
     ['Reports & Analytics','Membership growth, renewal rate, event attendance, PD progress, finances and exports.','Unified dashboard with filtered operational reports and authorised exports.','Natural-language report assistance']
