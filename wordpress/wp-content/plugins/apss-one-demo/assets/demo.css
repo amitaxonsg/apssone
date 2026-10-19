@@ -100,3 +100,15 @@ body.apss-demo-template{margin:0;background:#fff}body.apss-demo-template #main-c
 .rfq-quote-links a{background:#0c7069;color:white!important;font-size:16px;font-weight:750;border-radius:9px;padding:13px 20px;text-decoration:none}
 .rfq-quote-links a:nth-child(2){background:#123f4a}
 .rfq-quote-links a:hover{filter:brightness(1.12)}
+
+/* Contabo and AI quote appendices */
+.rfq-provider-spec{display:flex;flex-direction:column;gap:8px;padding:22px;margin:20px 0;border-radius:12px;background:#e7f4f0;border:1px solid #c8e2d9}
+.rfq-provider-spec strong{font-size:19px;color:#104f4f}
+.rfq-provider-spec span{font-size:16px;color:#476c72}
+.rfq-provider-spec b{font-size:31px;color:#096b65}
+.rfq-provider-spec small{font-size:13px;color:#627b80}
+.rfq-ai-price-table{overflow-x:auto;margin:20px 0}
+.rfq-ai-price-table table{width:100%;border-collapse:collapse;min-width:500px}
+.rfq-ai-price-table th,.rfq-ai-price-table td{font-size:15px;padding:12px;text-align:left;border-bottom:1px solid #d4e5df}
+.rfq-ai-price-table thead{background:#13545b;color:white}
+.rfq-appendix a{color:#08746c;text-decoration:underline}
