@@ -2,12 +2,12 @@
 /**
  * Plugin Name: APSS One RFQ Proposal
  * Description: Private APSS One digital transformation RFQ and quotation reference.
- * Version: 1.6.2
+ * Version: 1.6.3
  * Requires PHP: 8.1
  */
 if (!defined('ABSPATH')) exit;
 add_action('wp_enqueue_scripts', function () {
-  wp_register_style('apss-one-proposal', plugins_url('assets/demo.css', __FILE__), [], '1.6.2');
+  wp_register_style('apss-one-proposal', plugins_url('assets/demo.css', __FILE__), [], '1.6.3');
 });
 add_shortcode('apss_one_demo', function () {
   wp_enqueue_style('apss-one-proposal');
@@ -66,10 +66,10 @@ add_shortcode('apss_one_demo', function () {
       </div>
     </section>
     <section class="rfq-section" id="solutions">
-      <div class="rfq-head"><span class="rfq-eyebrow">03 / OUR PROPOSED SOLUTIONS</span><h2>Designed module by module.</h2><p>Every card connects an APSS requirement to a proposed implementation and an optional AI enhancement. Expand each module for the intended workflow. All production modules are <strong>Coming Soon</strong> and subject to approved project scope.</p></div>
+      <div class="rfq-head"><span class="rfq-eyebrow">03 / OUR PROPOSED SOLUTIONS</span><h2>Designed module by module.</h2><p>Every card connects an APSS requirement to a proposed implementation and an optional AI enhancement. Expand each module for the intended workflow. All modules are <strong>proposed development scope</strong>, subject to agreed specifications and acceptance criteria.</p></div>
       <div class="rfq-module-grid">
       <?php foreach($modules as $index=>$m): ?>
-        <details class="rfq-module"><summary><span class="rfq-index"><?php echo esc_html(sprintf('%02d',$index+1)); ?></span><span class="rfq-coming">Coming Soon</span><h3><?php echo esc_html($m[0]); ?></h3><p><?php echo esc_html($m[1]); ?></p><span class="rfq-expand">Read proposed workflow ↗</span></summary><div class="rfq-module-body"><b>Proposed solution</b><p><?php echo esc_html($m[2]); ?></p><b>AI opportunity</b><p><?php echo esc_html($m[3]); ?></p></div></details>
+        <details class="rfq-module"><summary><span class="rfq-index"><?php echo esc_html(sprintf('%02d',$index+1)); ?></span><span class="rfq-coming">Proposed Solution</span><h3><?php echo esc_html($m[0]); ?></h3><p><?php echo esc_html($m[1]); ?></p><span class="rfq-expand">Read proposed workflow ↗</span></summary><div class="rfq-module-body"><b>Proposed solution</b><p><?php echo esc_html($m[2]); ?></p><b>AI opportunity</b><p><?php echo esc_html($m[3]); ?></p></div></details>
       <?php endforeach; ?>
       </div>
     </section>
